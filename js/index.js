@@ -8,6 +8,9 @@ let obstaclesFrequency = 0; // support the logic for generating obstacles
 let background = new Image();
 background.src = "./images/road.png";
 
+let score = document.getElementById('#yourScore')
+
+
 //Opening Area and Start Button
 
 const toggleButton = document.querySelector('#start-button');
@@ -60,7 +63,7 @@ window.onload = () => {
 
     if (obstaclesFrequency % 60 === 1) {
         //Draw an obstacle
-        let randomObstacleX = Math.floor(Math.random() * 500);
+        let randomObstacleX = Math.floor(Math.random() * this.canvas.width);
         let randomObstacleY = 0;
         let randomObstacleWidth = 30;
         let randomObstacleHeight = 50;
@@ -71,6 +74,10 @@ window.onload = () => {
             randomObstacleHeight);
   
         currentGame.obstacles.push(newObstacle);
+        currentGame.score++;
+        console.log(currentGame.score);
+        yourScore.innerText = currentGame.score
+
     }
   
   

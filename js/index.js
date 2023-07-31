@@ -6,11 +6,12 @@ let currentCar;
 let obstaclesFrequency = 0; // support the logic for generating obstacles
 
 let isGameOver = false;
+let animationFrameId; 
 
 let background = new Image();
 background.src = "./images/road.png";
 
-let score = document.getElementById('#yourScore')
+let score = document.querySelector('#yourScore')
 let finalScore = document.getElementById('#scoreTwo')
 
 
@@ -65,7 +66,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     //Instantiate a new Car
     currentCar = new Car();
     currentCar.drawCar();
-    updateCanvas();// keeping track of the updates as the game unfolds
+    animationFrameId = requestAnimationFrame(updateCanvas);
   
   }
 
@@ -93,7 +94,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
   
         currentGame.obstacles.push(newObstacle);
         currentGame.score++;
-        yourScore.innerText = currentGame.score
+        score.innerText = currentGame.score
 
     }
   
@@ -115,6 +116,27 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         } 
       }
 
+        //To reset the score
+      function resetScore(){
+        currentGame.score = 0;
+        score.innerText = 0;
+      }
+
+      //Restart Button
+      let restartButton = document.getElementsByClassName('try-again-button')
+      for (let i = 0 ; i < restartButton.length; i++) {
+      restartButton[i].addEventListener('click',  ()=>{
+        cancelAnimationFrame(animationFrameId);
+      endScreen.style.display = 'none';
+      toggleOpening.style.display = 'none';
+      myCanvas.style.display = 'block';
+      toggleInfo.style.display = '' ;
+      isGameOver = false;
+      resetScore();
+      startGame();
+      }) 
+} 
+
 
       function endGame(){
         isGameOver = true;
@@ -124,7 +146,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         toggleInfo.style.display = 'none'
         myCanvas.style.display = 'none'
         endScreen.style.display = ''
-        yourScore.innerText = 0;
         scoreTwo.innerText = currentGame.score;
       }
 

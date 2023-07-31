@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>VeloRacerz</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+
+    <body>
+
+<section class="opening-section">
+
+    <h1>VeloRacerz</h1>
+
+    <div class="opening-text">
+    <p>Do you have what it takes to become the next Ayrton Senna?!</p>
+    <p>Use the <img src="./images/computer arrows.png" alt="arrows" id="arrows" width="40" height="40"> buttons to move the car. How long before you crash?!</p>
+    </div>
+
+
+    <button id="start-button">StartGame</button>
+</section>
+
+<section class="info">
+    <div class="score">Score: <span id="yourScore">0</span></div>
+</section>
+
+  <canvas id="canvas" width="500" height="700"></canvas> 
+
+<section class="full-time">
+    <p>You Crashed!</p>
+    <p id="finalScore">Final Score: <span id="scoreTwo">0</span>
+    <button class="try-again-button">Restart</button>
+    <button class="main-menu-button">Main Menu</button>  
+</section>
+
+    <script type="text/javascript" src="./js/car.js"></script>
+    <script type="text/javascript" src="./js/obstacle.js"></script>
+    <script type="text/javascript" src="./js/game.js"></script>
+    <script type="text/javascript" src="./js/index.js"></script>
+    <script type="text/javascript" src="./js/audio.js"></script>
+    
+</body>
+
+</html>

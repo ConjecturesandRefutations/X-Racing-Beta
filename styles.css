@@ -9,6 +9,7 @@
 html, body, .opening-section {
     margin: 0;
     padding: 0;
+    background-color: black;
   }
 
 .opening-section{
@@ -60,4 +61,40 @@ button:hover{
     top: 50%;
     left: 50%;
     transform: translate(-50%,-50%);
+}
+
+.full-time{
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background-image: url('images/crash.jpeg'); 
+  background-repeat: no-repeat; 
+  background-size: cover;
+}
+
+.full-time-text{
+  position: absolute;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  top: 20%;
+  left: 50%;
+  transform: translate(-50%);
+  font-weight: bolder;
+  font-size: large;
+  color: whitesmoke;
+}
+
+.full-time-text > p {
+  background-color: black;
+  border-radius: 5px;
+}
+
+.info{
+  margin-top: 50px;
+  font-size: xx-large;
+  font-weight: bold;
+  color: red;
 }

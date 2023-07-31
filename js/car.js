@@ -1,7 +1,7 @@
 class Car {
     constructor(){
       this.x = canvas.width/2;
-      this.y = canvas.height/2;
+      this.y = canvas.height/1.5;
       this.width = 30;
       this.height = 50;
       this.img = './images/red-car.png';
@@ -14,8 +14,6 @@ class Car {
     }
 
     moveCar(keyCode){
-      console.log('x', this.x);
-      console.log('y', this.y);
       ctx.clearRect(this.x, this.y, this.width, this.height);
       switch(keyCode){
         case 37: //left

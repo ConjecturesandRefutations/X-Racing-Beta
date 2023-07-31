@@ -5,18 +5,25 @@ let currentCar;
 
 let obstaclesFrequency = 0; // support the logic for generating obstacles
 
+let isGameOver = false;
+
 let background = new Image();
 background.src = "./images/road.png";
 
 let score = document.getElementById('#yourScore')
+let finalScore = document.getElementById('#scoreTwo')
+
 
 
 //Opening Area and Start Button
 
 const toggleButton = document.querySelector('#start-button');
 const toggleOpening = document.querySelector('.opening-section');
+const toggleInfo = document.querySelector('.info');
+const endScreen = document.querySelector('.full-time')
+
 toggleOpening.style.display = '';
-toggleInfo = document.querySelector('.info');
+endScreen.style.display = 'none';
 
 
 //Game Area
@@ -42,6 +49,14 @@ window.onload = () => {
   }
   };
 
+  //Main Menu Button
+let mainMenuButton = document.getElementsByClassName('main-menu-button')
+for (let i = 0 ; i < mainMenuButton.length; i++) {
+  mainMenuButton[i].addEventListener('click',  ()=>{
+    location.reload() 
+  })  
+}
+
   function startGame() {
   
     currentGame = new Game();
@@ -55,7 +70,10 @@ window.onload = () => {
   }
 
   function updateCanvas() {
+
+    if (isGameOver) return;
     ctx.clearRect(0, 0, 700, 500); // clear canvas
+    
     ctx.drawImage(background, 0, 0,myCanvas.width,myCanvas.height); // redraw the background
   
    currentCar.drawCar(); // redraw the Car at its current position
@@ -75,7 +93,6 @@ window.onload = () => {
   
         currentGame.obstacles.push(newObstacle);
         currentGame.score++;
-        console.log(currentGame.score);
         yourScore.innerText = currentGame.score
 
     }
@@ -84,16 +101,40 @@ window.onload = () => {
     for(let i = 0; i<currentGame.obstacles.length; i++) {
         currentGame.obstacles[i].y += 3; 
         currentGame.obstacles[i].drawObstacle();
+
+        if (detectCollision(currentGame.obstacles[i])) {
+          currentCar.x = myCanvas.width/2;
+          currentCar.y = myCanvas.height/1.5;
+          endGame();
+        }
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
           currentGame.obstacles.splice(i, 1); // remove that obstacle from the array
+          console.log(currentGame.obstacles.length)
         } 
+      }
+
+
+      function endGame(){
+        isGameOver = true;
+        currentCar.x = myCanvas.width/2
+        currentCar.y = myCanvas.height/1.5
+        toggleOpening.style.display = 'none'
+        toggleInfo.style.display = 'none'
+        myCanvas.style.display = 'none'
+        endScreen.style.display = ''
+        yourScore.innerText = 0;
+        scoreTwo.innerText = currentGame.score;
       }
 
       requestAnimationFrame(updateCanvas);
 
   }
   
-
-      
+  function detectCollision(obstacle) {
+    return ((currentCar.x < obstacle.x + obstacle.width) &&         // check left side of element 
+    (currentCar.x + obstacle.width > obstacle.x) &&           // check right side
+    (currentCar.y < obstacle.y + obstacle.height) &&         // check top side
+    (currentCar.y + currentCar.height > obstacle.y));           // check bottom side
+  }

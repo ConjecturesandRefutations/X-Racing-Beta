@@ -38,3 +38,55 @@ window.onload = () => {
       currentCar.moveCar(whereToGo);
   }
   };
+
+  function startGame() {
+  
+    currentGame = new Game();
+    ctx.drawImage(background, 0, 0,myCanvas.width,myCanvas.height); // draw background image
+  
+    //Instantiate a new Car
+    currentCar = new Car();
+    currentCar.drawCar();
+    updateCanvas();// keeping track of the updates as the game unfolds
+  
+  }
+
+  function updateCanvas() {
+    ctx.clearRect(0, 0, 700, 500); // clear canvas
+    ctx.drawImage(background, 0, 0,myCanvas.width,myCanvas.height); // redraw the background
+  
+   currentCar.drawCar(); // redraw the Car at its current position
+    obstaclesFrequency++;
+
+    if (obstaclesFrequency % 60 === 1) {
+        //Draw an obstacle
+        let randomObstacleX = Math.floor(Math.random() * 500);
+        let randomObstacleY = 0;
+        let randomObstacleWidth = 30;
+        let randomObstacleHeight = 50;
+        let newObstacle = new Obstacle(
+            randomObstacleX, 
+            randomObstacleY, 
+            randomObstacleWidth, 
+            randomObstacleHeight);
+  
+        currentGame.obstacles.push(newObstacle);
+    }
+  
+  
+    for(let i = 0; i<currentGame.obstacles.length; i++) {
+        currentGame.obstacles[i].y += 3; 
+        currentGame.obstacles[i].drawObstacle();
+  
+        // Logic for removing obstacles
+        if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
+          currentGame.obstacles.splice(i, 1); // remove that obstacle from the array
+        } 
+      }
+
+      requestAnimationFrame(updateCanvas);
+
+  }
+  
+
+      

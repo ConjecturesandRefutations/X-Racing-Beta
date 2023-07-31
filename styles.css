@@ -6,7 +6,23 @@
     font-family: poppins;
 }
 
+html, body, .opening-section {
+    margin: 0;
+    padding: 0;
+  }
+
 .opening-section{
+  left: 0;
+  right: 0;
+  width: 100vw;
+  height: 100vh;
+  display: block;
+  background-image: url('images/racing.jpg'); 
+  background-repeat: no-repeat; 
+  background-size: cover;
+}
+
+.opening-text{
     position: absolute;
     display: flex;
     flex-direction: column;
@@ -14,12 +30,32 @@
     top: 20%;
     left: 50%;
     transform: translate(-50%);
+    font-weight: bolder;
+    font-size: large;
+    color: whitesmoke;
+}
+
+.opening-text > p,
+.opening-text > h1 {
+  background-color: black;
+  border-radius: 5px;
+}
+
+button{
+  cursor: pointer;
+  background-color: red;
+  padding: 5px;
+  font-size: larger;
+  border-radius: 5px;
+}
+
+button:hover{
+  background-color: black;
+  color: red;
 }
 
 #canvas{
     position: absolute;
-    width: 500px;
-    height: 600px;
     border: 2px solid red;
     top: 50%;
     left: 50%;

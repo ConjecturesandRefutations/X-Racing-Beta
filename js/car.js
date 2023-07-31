@@ -1,10 +1,10 @@
 class Car {
     constructor(){
-      this.x = 231;
-      this.y = 520;
-      this.width = 40;
-      this.height = 40;
-      this.img = './images/car.jpg';
+      this.x = canvas.width/2;
+      this.y = canvas.height/2;
+      this.width = 30;
+      this.height = 50;
+      this.img = './images/red-car.png';
     }
     
     drawCar(){
@@ -34,7 +34,7 @@ class Car {
           }
           break;
           case 40: //down
-         if(this.y<650){
+         if(this.y<580){
              this.y += 10;
          }
       }

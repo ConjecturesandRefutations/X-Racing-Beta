@@ -80,7 +80,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
    currentCar.drawCar(); // redraw the Car at its current position
     obstaclesFrequency++;
 
-    if (obstaclesFrequency % 60 === 1) {
+    if (obstaclesFrequency % 30 === 1) {
         //Draw an obstacle
         let randomObstacleX = Math.floor(Math.random() * this.canvas.width);
         let randomObstacleY = 0;

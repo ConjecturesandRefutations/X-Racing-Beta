@@ -4,15 +4,23 @@ class Obstacle {
       this.y = y;
       this.width =  30;
       this.height =  50;
-      this.obstacleType = Math.random() < 0.5 ? 'banana' : 'blue';
+      this.obstacleType = this.getRandomColor();
+    }
+
+    getRandomColor() {
+      const colors = ['red', 'blue', 'yellow'];
+      const randomIndex = Math.floor(Math.random() * colors.length);
+      return colors[randomIndex];
     }
   
     drawObstacle() {
       const obstacleImg = new Image();
       obstacleImg.src =
-        this.obstacleType === 'banana'
-          ? './images/obstacleCarRed.png'
-          : './images/obstacleCarBlue.png';
+      this.obstacleType === 'red'
+      ? './images/obstacleCarRed.png'
+      : this.obstacleType === 'blue'
+      ? './images/obstacleCarBlue.png'
+      : './images/obstacleCarYellow.png';
       ctx.drawImage(obstacleImg, this.x, this.y, this.width, this.height);
     }
   }

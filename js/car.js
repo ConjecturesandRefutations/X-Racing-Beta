@@ -1,12 +1,40 @@
+let currentColor = 'blue';
+
+function handleColorChange(event) {
+  if (event.target.checked) {
+    currentColor = event.target.value;
+    // Uncheck other checkboxes
+    const checkboxes = document.querySelectorAll('input[name="color"]');
+    checkboxes.forEach((checkbox) => {
+      if (checkbox !== event.target) {
+        checkbox.checked = false;
+      }
+    });
+  }
+}
+
 class Car {
     constructor(){
       this.x = canvas.width/2;
       this.y = canvas.height/1.5;
       this.width = 30;
       this.height = 50;
-      this.img = './images/red-car.png';
+      this.img = this.getImagePath();
     }
     
+    getImagePath() {
+      // Return the appropriate image path based on the currentColor
+      switch (currentColor) {
+        case 'yellow':
+          return './images/yellow-car.png';
+        case 'blue':
+          return './images/blue-car.png';
+        case 'red':
+        default:
+          return './images/red-car.png';
+      }
+    }
+
     drawCar(){
       const carImg = new Image();
       carImg.src = this.img;

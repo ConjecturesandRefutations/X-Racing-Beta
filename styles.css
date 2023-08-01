@@ -133,6 +133,24 @@ button:hover{
   right: 50px;
 }
 
+#level{
+  color: blue;
+  font-size: 100px;
+}
+
+.utilityButtons{
+  display: flex;
+  flex-direction: row;
+  margin-top: 10px;
+  gap: 10px;
+}
+
+.stats{
+  display: flex;
+  flex-direction: row;
+  background-color: black;
+}
+
 @media(max-width:630px){
 .opening-text  {
   width: 90%;

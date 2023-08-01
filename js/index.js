@@ -14,6 +14,8 @@ background.src = "./images/road.png";
 
 let scoreDisplay = document.querySelector('#yourScore')
 let finalScore = document.getElementById('#scoreTwo')
+let finalLevel = document.getElementById('#levelTwo')
+
 
 let level = document.querySelector('#level')
 
@@ -134,6 +136,8 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
       function resetScore(){
         currentGame.score = 0;
         scoreDisplay.innerText = 0;
+        currentGame.level = 1;
+        level.innerText = 1;
       }
 
       //Restart Button
@@ -163,6 +167,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         myCanvas.style.display = 'none'
         endScreen.style.display = ''
         scoreTwo.innerText = currentGame.score;
+        levelTwo.innerText = currentGame.level;
       }
 
       requestAnimationFrame(updateCanvas);

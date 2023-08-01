@@ -47,21 +47,25 @@ class Car {
         case 37: //left
         if(this.x > 15){
           this.x -= 10;
+          turn.play();
         }
           break;
         case 39: //right
         if (this.x < 450 ){
           this.x += 10;
+          turn.play();
         }
           break;
           case 38: //up
           if(this.y>20){
              this.y -= 10;
+             turn.play();
           }
           break;
           case 40: //down
          if(this.y<580){
              this.y += 10;
+             turn.play(); 
          }
       }
     }

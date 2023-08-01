@@ -64,7 +64,9 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 }
 
   function startGame() {
-  
+
+    drive.play();
+
     currentGame = new Game();
     ctx.drawImage(background, 0, 0,myCanvas.width,myCanvas.height); // draw background image
   
@@ -114,6 +116,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         currentGame.obstacles[i].drawObstacle();
 
         if (detectCollision(currentGame.obstacles[i])) {
+          crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
@@ -127,6 +130,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
       //Logic for increasing the difficulty
       if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+        congrats.play();
         obstacleSpeed += 0.03; // Increase the obstacle speed by 0.5
         currentGame.level = Math.floor(obstacleSpeed);
         level.innerText=currentGame.level-1
@@ -159,6 +163,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
 
       function endGame(){
+        congrats.pause();
         isGameOver = true;
         currentCar.x = myCanvas.width/2
         currentCar.y = myCanvas.height/1.5

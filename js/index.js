@@ -142,7 +142,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         //Logic for increasing the difficulty
         if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
           congrats.play();
-          obstacleSpeed += 0.04; // Increase the obstacle speed by 0.04
+          obstacleSpeed += 0.045; // Increase the obstacle speed by 0.045
           currentGame.level = Math.floor(obstacleSpeed);
           level.innerText=currentGame.level-1
         }
@@ -157,6 +157,10 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
         if (currentGame.score % 200 === 0 && currentGame.score !== 0 && obstacleSpeed) {
           modulo = 10;
+        }
+
+        if (currentGame.score % 300 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 7;
         }
 
         if (currentGame.score % 500 === 0 && currentGame.score !== 0 && obstacleSpeed) {

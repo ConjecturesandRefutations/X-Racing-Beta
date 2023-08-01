@@ -65,7 +65,7 @@ class Car {
           case 40: //down
          if(this.y<580){
              this.y += 10;
-             turn.play(); 
+             turn.play();
          }
       }
     }

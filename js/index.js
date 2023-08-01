@@ -10,6 +10,7 @@ let isGameOver = false;
 let animationFrameId; 
 
 let background = new Image();
+let backgroundY = 0;
 background.src = "./images/road.png";
 
 let scoreDisplay = document.querySelector('#yourScore')
@@ -83,10 +84,18 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
   function updateCanvas() {
 
     if (isGameOver) return;
-    ctx.clearRect(0, 0, 700, 500); // clear canvas
+    ctx.clearRect(0, 0, myCanvas.width, myCanvas.height); // clear canvas
     
-    ctx.drawImage(background, 0, 0,myCanvas.width,myCanvas.height); // redraw the background
-  
+    // Scroll the background downwards
+    backgroundY += 5;
+    if (backgroundY >= myCanvas.height) {
+        backgroundY = 0;
+    }
+
+    // Draw the background image twice, one above the other, to cover the entire canvas
+    ctx.drawImage(background, 0, backgroundY, myCanvas.width, myCanvas.height);
+    ctx.drawImage(background, 0, backgroundY - myCanvas.height, myCanvas.width, myCanvas.height);
+
    currentCar.drawCar(); // redraw the Car at its current position
     obstaclesFrequency++;
 
@@ -94,7 +103,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
     if (obstaclesFrequency % 30 === 1) {
         //Draw an obstacle
-        let randomObstacleX = Math.floor(Math.random() * this.canvas.width);
+        let randomObstacleX = Math.floor(Math.random() * myCanvas.width);
         let randomObstacleY = 0;
         let randomObstacleWidth = 30;
         let randomObstacleHeight = 50;

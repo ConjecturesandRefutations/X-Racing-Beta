@@ -4,6 +4,7 @@ let currentGame;
 let currentCar;
 
 let obstaclesFrequency = 0; // support the logic for generating obstacles
+let obstacleSpeed = 3;
 
 let isGameOver = false;
 let animationFrameId; 
@@ -11,8 +12,10 @@ let animationFrameId;
 let background = new Image();
 background.src = "./images/road.png";
 
-let score = document.querySelector('#yourScore')
+let scoreDisplay = document.querySelector('#yourScore')
 let finalScore = document.getElementById('#scoreTwo')
+
+let level = document.querySelector('#level')
 
 
 
@@ -67,6 +70,9 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     currentCar = new Car();
     currentCar.drawCar();
     animationFrameId = requestAnimationFrame(updateCanvas);
+
+     // Initialize the level variable when the game starts
+  currentGame.level = 1;
   
   }
 
@@ -79,6 +85,8 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
   
    currentCar.drawCar(); // redraw the Car at its current position
     obstaclesFrequency++;
+
+
 
     if (obstaclesFrequency % 30 === 1) {
         //Draw an obstacle
@@ -94,13 +102,13 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
   
         currentGame.obstacles.push(newObstacle);
         currentGame.score++;
-        score.innerText = currentGame.score
+        scoreDisplay.innerText = currentGame.score
 
     }
-  
+
   
     for(let i = 0; i<currentGame.obstacles.length; i++) {
-        currentGame.obstacles[i].y += 3; 
+        currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
 
         if (detectCollision(currentGame.obstacles[i])) {
@@ -112,30 +120,38 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
           currentGame.obstacles.splice(i, 1); // remove that obstacle from the array
-          console.log(currentGame.obstacles.length)
         } 
+      }
+
+      //Logic for increasing the difficulty
+      if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+        obstacleSpeed += 0.03; // Increase the obstacle speed by 0.5
+        currentGame.level = Math.floor(obstacleSpeed);
+        level.innerText=currentGame.level-1
       }
 
         //To reset the score
       function resetScore(){
         currentGame.score = 0;
-        score.innerText = 0;
+        scoreDisplay.innerText = 0;
       }
 
       //Restart Button
       let restartButton = document.getElementsByClassName('try-again-button')
       for (let i = 0 ; i < restartButton.length; i++) {
       restartButton[i].addEventListener('click',  ()=>{
-        cancelAnimationFrame(animationFrameId);
+      cancelAnimationFrame(animationFrameId);
       endScreen.style.display = 'none';
       toggleOpening.style.display = 'none';
       myCanvas.style.display = 'block';
       toggleInfo.style.display = '' ;
       isGameOver = false;
+      obstacleSpeed = 3;
       resetScore();
       startGame();
       }) 
 } 
+
 
 
       function endGame(){
@@ -152,7 +168,8 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
       requestAnimationFrame(updateCanvas);
 
   }
-  
+
+
   function detectCollision(obstacle) {
     return ((currentCar.x < obstacle.x + obstacle.width) &&         // check left side of element 
     (currentCar.x + obstacle.width > obstacle.x) &&           // check right side

@@ -26,7 +26,7 @@ html, body, .opening-section {
     display: flex;
     flex-direction: column;
     align-items: center;
-    top: 20%;
+    top: 8%;
     left: 50%;
     transform: translate(-50%);
     font-weight: bolder;
@@ -125,6 +125,12 @@ button:hover{
   font-size: xx-large;
   font-weight: bold;
   color: red;
+}
+
+.level{
+  position: absolute;
+  top: 50px;
+  right: 50px;
 }
 
 @media(max-width:630px){

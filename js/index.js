@@ -167,7 +167,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
           modulo = 5;
         }
 
-        if (currentGame.score % 500 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+        if (currentGame.score % 600 === 0 && currentGame.score !== 0 && obstacleSpeed) {
           modulo = 2;
         }
 

@@ -203,6 +203,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         endScreen.style.display = ''
         scoreTwo.innerText = currentGame.score;
         levelTwo.innerText = currentGame.level;
+        modulo = 30;
       }
 
       requestAnimationFrame(updateCanvas);

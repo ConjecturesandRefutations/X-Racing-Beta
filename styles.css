@@ -100,6 +100,11 @@ button:hover{
   background-size: cover;
 }
 
+#fifty{
+  color: red;
+  font-size: larger;
+}
+
 .full-time-text{
   position: absolute;
   display: flex;

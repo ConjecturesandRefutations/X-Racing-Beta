@@ -125,6 +125,8 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         currentGame.obstacles[i].drawObstacle();
 
         if (detectCollision(currentGame.obstacles[i])) {
+          congrats.pause();
+          congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
@@ -172,7 +174,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
 
       function endGame(){
-        congrats.pause();
         isGameOver = true;
         currentCar.x = myCanvas.width/2
         currentCar.y = myCanvas.height/1.5

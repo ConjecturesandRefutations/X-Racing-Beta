@@ -17,10 +17,11 @@ let scoreDisplay = document.querySelector('#yourScore')
 let finalScore = document.getElementById('#scoreTwo')
 let finalLevel = document.getElementById('#levelTwo')
 
+let frameCount = 0;
 
 let level = document.querySelector('#level')
 
-
+let modulo = 30;
 
 //Opening Area and Start Button
 
@@ -96,15 +97,13 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     ctx.drawImage(background, 0, backgroundY, myCanvas.width, myCanvas.height);
     ctx.drawImage(background, 0, backgroundY - myCanvas.height, myCanvas.width, myCanvas.height);
 
-   currentCar.drawCar(); // redraw the Car at its current position
+    currentCar.drawCar(); // redraw the Car at its current position
     obstaclesFrequency++;
 
-
-
-    if (obstaclesFrequency % 30 === 1) {
+    if (obstaclesFrequency % modulo === 1) {
         //Draw an obstacle
         let randomObstacleX = Math.floor(Math.random() * myCanvas.width);
-        let randomObstacleY = 0;
+        let randomObstacleY = -50;
         let randomObstacleWidth = 30;
         let randomObstacleHeight = 50;
         let newObstacle = new Obstacle(
@@ -140,12 +139,33 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
       }
 
       //Logic for increasing the difficulty
-      if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-        congrats.play();
-        obstacleSpeed += 0.03; // Increase the obstacle speed by 0.5
-        currentGame.level = Math.floor(obstacleSpeed);
-        level.innerText=currentGame.level-1
-      }
+        //Logic for increasing the difficulty
+        if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          congrats.play();
+          obstacleSpeed += 0.04; // Increase the obstacle speed by 0.04
+          currentGame.level = Math.floor(obstacleSpeed);
+          level.innerText=currentGame.level-1
+        }
+
+        if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 25;
+        }
+
+        if (currentGame.score % 100 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 20;
+        }
+
+        if (currentGame.score % 200 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 10;
+        }
+
+        if (currentGame.score % 500 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 5;
+        }
+
+        if (currentGame.score % 500 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 2;
+        }
 
         //To reset the score
       function resetScore(){

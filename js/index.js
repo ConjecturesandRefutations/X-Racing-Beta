@@ -156,18 +156,38 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         }
 
         if (currentGame.score % 200 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 10;
+          modulo = 15;
         }
 
         if (currentGame.score % 300 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 7;
+          modulo = 10;
+        }
+
+        if (currentGame.score % 400 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 8;
         }
 
         if (currentGame.score % 500 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 5;
+          modulo = 7;
         }
 
         if (currentGame.score % 600 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 6;
+        }
+
+        if (currentGame.score % 700 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 5;
+        }
+
+        if (currentGame.score % 800 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 4;
+        }
+
+        if (currentGame.score % 900 === 0 && currentGame.score !== 0 && obstacleSpeed) {
+          modulo = 3;
+        }
+
+        if (currentGame.score % 1000 === 0 && currentGame.score !== 0 && obstacleSpeed) {
           modulo = 2;
         }
 

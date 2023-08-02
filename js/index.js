@@ -20,7 +20,6 @@ let finalLevel = document.getElementById('#levelTwo')
 let frameCount = 0;
 
 let level = document.querySelector('#level')
-let difficultyLevel = 1;
 let lastDifficultyUpdate = 0;
 
 let modulo = 30;
@@ -139,13 +138,13 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
       if (currentGame.score >= lastDifficultyUpdate + 50 && obstacleSpeed) {
         congrats.play();
         obstacleSpeed += 0.5;
-        difficultyLevel++;
+        currentGame.level++;
         lastDifficultyUpdate = currentGame.score;
-        level.innerText = difficultyLevel;
-        console.log(difficultyLevel);
+        level.innerText = currentGame.level;
+        console.log(currentGame.level);
       
         // Set the modulo value based on the difficulty level
-        switch (difficultyLevel) {
+        switch (currentGame.level) {
           case 1:
             modulo = 30;
             break;
@@ -186,8 +185,8 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
       function resetScore(){
         currentGame.score = 0;
         scoreDisplay.innerText = 0;
-        difficultyLevel = 1;
-        level.innerText = difficultyLevel;
+        currentGame.level = 1;
+        level.innerText = currentGame.level;
         lastDifficultyUpdate = 0;
         modulo = 30;
       }
@@ -219,7 +218,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         myCanvas.style.display = 'none'
         endScreen.style.display = ''
         scoreTwo.innerText = currentGame.score;
-        levelTwo.innerText = difficultyLevel;
+        levelTwo.innerText = currentGame.level;
       }
 
       requestAnimationFrame(updateCanvas);

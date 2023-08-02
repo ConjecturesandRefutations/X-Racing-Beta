@@ -138,7 +138,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
       if (currentGame.score >= lastDifficultyUpdate + 50 && obstacleSpeed) {
         congrats.play();
-        obstacleSpeed += 0.045;
+        obstacleSpeed += 0.5;
         difficultyLevel++;
         lastDifficultyUpdate = currentGame.score;
         level.innerText = difficultyLevel;
@@ -181,7 +181,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
             break;
         }
       }
-      
+
         //To reset the score
       function resetScore(){
         currentGame.score = 0;

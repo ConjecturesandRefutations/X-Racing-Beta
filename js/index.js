@@ -24,6 +24,7 @@ let lastDifficultyUpdate = 0;
 
 let modulo = 30;
 
+
 //Opening Area and Start Button
 
 const toggleButton = document.querySelector('#start-button');
@@ -45,7 +46,10 @@ toggleInfo.style.display = 'none';
 //Start Button
 
 window.onload = () => {
+    opening.play();
     toggleButton.onclick = () => {
+    drive.play();
+    opening.pause();
     toggleOpening.style.display = 'none';
     myCanvas.style.display = '';
     toggleInfo.style.display = '';      
@@ -69,7 +73,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
   function startGame() {
 
     drive.play();
-
     currentGame = new Game();
     ctx.drawImage(background, 0, 0,myCanvas.width,myCanvas.height); // draw background image
   

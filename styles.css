@@ -172,6 +172,14 @@ button:hover{
   font-size: 50px;
 }
 
+.music-credit{
+  position: absolute;
+  color: white;
+  left: 5px;
+  bottom: 0px;
+  font-size: x-small;
+}
+
 @media(max-width:630px){
 .opening-text  {
   width: 90%;
@@ -179,5 +187,8 @@ button:hover{
 .opening-text > p,
 .opening-text > h1 {
   white-space: normal;
+}
+.music-credit{
+  display: none;
 }
 }

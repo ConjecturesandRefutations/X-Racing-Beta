@@ -6,3 +6,4 @@ let turn = new Audio('./audio/turn.mp3')
 
 let congrats = new Audio('./audio/congrats.mp3')
 
+let opening = new Audio('./audio/opening.mp3')

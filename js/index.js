@@ -143,35 +143,45 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         lastDifficultyUpdate = currentGame.score;
         level.innerText = difficultyLevel;
         console.log(difficultyLevel);
-
-        if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-            if (currentGame.score % 1100 === 0) {
-                modulo = 2;
-            } else if (currentGame.score % 1000 === 0) {
-                modulo = 3;
-            } else if (currentGame.score % 900 === 0) {
-                modulo = 4;
-            } else if (currentGame.score % 800 === 0) {
-                modulo = 5;
-            } else if (currentGame.score % 700 === 0) {
-                modulo = 6;
-            } else if (currentGame.score % 600 === 0) {
-                modulo = 8;
-            } else if (currentGame.score % 500 === 0) {
-                modulo = 10;
-            } else if (currentGame.score % 400 === 0) {
-                modulo = 13;
-            } else if (currentGame.score % 300 === 0) {
-                modulo = 15;
-            } else if (currentGame.score % 200 === 0) {
-                modulo = 17;
-            } else if (currentGame.score % 100 === 0) {
-                modulo = 20;
-            } else if (currentGame.score % 50 === 0) {
-                modulo = 25;
-            }
+      
+        // Set the modulo value based on the difficulty level
+        switch (difficultyLevel) {
+          case 1:
+            modulo = 30;
+            break;
+          case 2:
+            modulo = 25;
+            break;
+          case 3:
+            modulo = 20;
+            break;
+          case 4:
+            modulo = 17;
+            break;
+          case 5:
+            modulo = 15;
+            break;
+          case 6:
+            modulo = 13;
+            break;
+          case 7:
+            modulo = 11;
+            break;
+          case 8:
+            modulo = 9;
+            break;
+          case 9:
+            modulo = 7;
+            break;
+          case 10:
+            modulo = 5;
+            break;
+          case 11:
+            modulo = 2;
+            break;
         }
-    }
+      }
+      
         //To reset the score
       function resetScore(){
         currentGame.score = 0;

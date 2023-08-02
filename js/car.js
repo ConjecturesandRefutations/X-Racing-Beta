@@ -10,8 +10,15 @@ function handleColorChange(event) {
         checkbox.checked = false;
       }
     });
+  } else {
+    // Ensure that at least one checkbox is always checked
+    const checkedCheckboxes = document.querySelectorAll('input[name="color"]:checked');
+    if (checkedCheckboxes.length === 0) {
+      event.target.checked = true;
+    }
   }
 }
+
 
 class Car {
     constructor(){

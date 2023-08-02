@@ -178,6 +178,8 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         scoreDisplay.innerText = 0;
         difficultyLevel = 1;
         level.innerText = difficultyLevel;
+        lastDifficultyUpdate = 0;
+        modulo = 30;
       }
 
       //Restart Button
@@ -208,7 +210,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         endScreen.style.display = ''
         scoreTwo.innerText = currentGame.score;
         levelTwo.innerText = difficultyLevel;
-        modulo = 30;
       }
 
       requestAnimationFrame(updateCanvas);

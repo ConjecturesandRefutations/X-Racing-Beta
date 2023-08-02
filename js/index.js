@@ -20,6 +20,8 @@ let finalLevel = document.getElementById('#levelTwo')
 let frameCount = 0;
 
 let level = document.querySelector('#level')
+let difficultyLevel = 1;
+let lastDifficultyUpdate = 0;
 
 let modulo = 30;
 
@@ -76,9 +78,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     currentCar = new Car();
     currentCar.drawCar();
     animationFrameId = requestAnimationFrame(updateCanvas);
-
-     // Initialize the level variable when the game starts
-  currentGame.level = 1;
   
   }
 
@@ -123,14 +122,13 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
 
-        if (detectCollision(currentGame.obstacles[i])) {
-          congrats.pause();
+     if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }
+        }  
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
@@ -138,69 +136,48 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         } 
       }
 
-      //Logic for increasing the difficulty
-        //Logic for increasing the difficulty
-        if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          congrats.play();
-          obstacleSpeed += 0.045; // Increase the obstacle speed by 0.045
-          currentGame.level = Math.floor(obstacleSpeed);
-          level.innerText=currentGame.level-1
-        }
+      if (currentGame.score >= lastDifficultyUpdate + 50 && obstacleSpeed) {
+        congrats.play();
+        obstacleSpeed += 0.045;
+        difficultyLevel++;
+        lastDifficultyUpdate = currentGame.score;
+        level.innerText = difficultyLevel;
+        console.log(difficultyLevel);
 
         if (currentGame.score % 50 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 25;
+            if (currentGame.score % 1100 === 0) {
+                modulo = 2;
+            } else if (currentGame.score % 1000 === 0) {
+                modulo = 3;
+            } else if (currentGame.score % 900 === 0) {
+                modulo = 4;
+            } else if (currentGame.score % 800 === 0) {
+                modulo = 5;
+            } else if (currentGame.score % 700 === 0) {
+                modulo = 6;
+            } else if (currentGame.score % 600 === 0) {
+                modulo = 8;
+            } else if (currentGame.score % 500 === 0) {
+                modulo = 10;
+            } else if (currentGame.score % 400 === 0) {
+                modulo = 13;
+            } else if (currentGame.score % 300 === 0) {
+                modulo = 15;
+            } else if (currentGame.score % 200 === 0) {
+                modulo = 17;
+            } else if (currentGame.score % 100 === 0) {
+                modulo = 20;
+            } else if (currentGame.score % 50 === 0) {
+                modulo = 25;
+            }
         }
-
-        if (currentGame.score % 100 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 20;
-        }
-
-        if (currentGame.score % 200 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 17;
-        }
-
-        if (currentGame.score % 300 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 15;
-        }
-
-        if (currentGame.score % 400 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 13;
-        }
-
-        if (currentGame.score % 500 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 10;
-        }
-
-        if (currentGame.score % 600 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 8;
-        }
-
-        if (currentGame.score % 700 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 6;
-        }
-
-        if (currentGame.score % 800 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 5;
-        }
-
-        if (currentGame.score % 900 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 4;
-        }
-
-        if (currentGame.score % 1000 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 3;
-        }
-
-        if (currentGame.score % 1100 === 0 && currentGame.score !== 0 && obstacleSpeed) {
-          modulo = 2;
-        }
-
+    }
         //To reset the score
       function resetScore(){
         currentGame.score = 0;
         scoreDisplay.innerText = 0;
-        currentGame.level = 1;
-        level.innerText = 1;
+        difficultyLevel = 1;
+        level.innerText = difficultyLevel;
       }
 
       //Restart Button
@@ -230,7 +207,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         myCanvas.style.display = 'none'
         endScreen.style.display = ''
         scoreTwo.innerText = currentGame.score;
-        levelTwo.innerText = currentGame.level;
+        levelTwo.innerText = difficultyLevel;
         modulo = 30;
       }
 

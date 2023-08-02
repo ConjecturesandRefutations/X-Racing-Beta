@@ -4,6 +4,5 @@ class Game {
         this.obstacles = [];
         this.score = 0;
         this.carColor = ' ';
-        this.level = 1;
     }
 }

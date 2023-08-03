@@ -31,12 +31,12 @@ class Car {
     this.leftButton = document.getElementById('left');
     this.rightButton = document.getElementById('right');
 
-    // Add event listeners to the buttons
-    this.leftButton.addEventListener('click', () => {
+    // Add touch event listeners to the buttons
+    this.leftButton.addEventListener('touchstart', () => {
       this.moveCar(37); // 37 is the keycode for the left arrow key
     });
 
-    this.rightButton.addEventListener('click', () => {
+    this.rightButton.addEventListener('touchstart', () => {
       this.moveCar(39); // 39 is the keycode for the right arrow key
     });
   

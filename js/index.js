@@ -210,21 +210,37 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
       //Restart Button
       let restartButton = document.getElementsByClassName('try-again-button')
-      for (let i = 0 ; i < restartButton.length; i++) {
-      restartButton[i].addEventListener('click',  (event)=>{
-      closing.pause()
-      event.stopPropagation();
-      endScreen.style.display = 'none';
-      toggleOpening.style.display = 'none';
-      myCanvas.style.display = 'block';
-      toggleInfo.style.display = '' ;
-      mobile.style.display = '';
-      isGameOver = false;
-      obstacleSpeed = 3;
-      resetScore();
-      startGame();
-      }) 
-} 
+      let isRestarting = false;
+      for (let i = 0; i < restartButton.length; i++) {
+        restartButton[i].addEventListener('click', (event) => {
+          event.stopPropagation();
+      
+          // Check if restart is already in progress
+          if (isRestarting) return;
+      
+          // Set the flag to true to indicate restart in progress
+          isRestarting = true;
+      
+          closing.pause();
+          endScreen.style.display = 'none';
+          toggleOpening.style.display = 'none';
+          myCanvas.style.display = 'block';
+          toggleInfo.style.display = '';
+          mobile.style.display = '';
+          isGameOver = false;
+          obstacleSpeed = 3;
+          resetScore();
+      
+          // Remove the previous event listeners from the currentCar object
+          currentCar.removeEventListeners();
+      
+          // Start the game again
+          startGame().then(() => {
+            // Reset the restart flag after the restart process is complete
+            isRestarting = false;
+          });
+        });
+      }
 
 
 

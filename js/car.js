@@ -121,7 +121,7 @@ class Car {
         }
           break;
         case 39: //right
-        if (this.x < 450 ){
+        if (this.x < 470 ){
           this.x += 10;
           turn.play();
         }
@@ -172,6 +172,17 @@ startMovingCar(direction) {
       if (!this.leftButtonDown && !this.rightButtonDown) {
         cancelAnimationFrame(this.requestAnimationFrame);
       }
+    }
+
+    removeEventListeners() {
+      this.leftButton.removeEventListener('touchstart', this.throttledLeftStart);
+      this.rightButton.removeEventListener('touchstart', this.throttledRightStart);
+      this.leftButton.removeEventListener('touchend', this.stopMovingCar);
+      this.rightButton.removeEventListener('touchend', this.stopMovingCar);
+      this.leftButton.removeEventListener('mousedown', this.throttledLeftStart);
+      this.rightButton.removeEventListener('mousedown', this.throttledRightStart);
+      this.leftButton.removeEventListener('mouseup', this.stopMovingCar);
+      this.rightButton.removeEventListener('mouseup', this.stopMovingCar);
     }
      
   }

@@ -64,14 +64,17 @@ document.getElementById("right").addEventListener("mousedown", function () {
 
 // Add touchstart and touchend event listeners for mobile devices
 document.getElementById("left").addEventListener("touchstart", function () {
+  event.preventDefault(); // Prevent default touch behavior
   startContinuousMovement("left"); // Start moving left when the left button is touched
 });
 
 document.getElementById("right").addEventListener("touchstart", function () {
+  event.preventDefault(); // Prevent default touch behavior
   startContinuousMovement("right"); // Start moving right when the right button is touched
 });
 
 document.addEventListener("touchend", function () {
+  event.preventDefault(); // Prevent default touch behavior
   if (isButtonDown) {
     stopContinuousMovement(); // Stop car movement if the touch is released while it was down
   }
@@ -79,6 +82,7 @@ document.addEventListener("touchend", function () {
 
 // Add event listener to stop the car when the button is released (for desktop devices)
 document.addEventListener("mouseup", function () {
+  event.preventDefault(); // Prevent default touch behavior
   if (isButtonDown) {
     stopContinuousMovement(); // Stop car movement if the button is released while it was down
   }

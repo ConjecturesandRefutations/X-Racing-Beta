@@ -37,7 +37,7 @@ function startContinuousMovement(action) {
   isButtonDown = true;
   intervalId = setInterval(function () {
     currentCar.turnCar(action); // MoveCar with the specified action repeatedly
-  }, 100);
+  }, 100); // Adjust the interval as needed to control the speed of movement
 }
 
 function stopContinuousMovement() {
@@ -45,7 +45,7 @@ function stopContinuousMovement() {
   clearInterval(intervalId);
 }
 
-// Add click and hold event listeners to the mobile buttons
+// Add click, touch, and hold event listeners to the mobile buttons
 document.getElementById("left").addEventListener("click", function () {
   handleMobileButtonClick("left"); // Move left when the left button is clicked once
 });
@@ -62,7 +62,22 @@ document.getElementById("right").addEventListener("mousedown", function () {
   startContinuousMovement("right"); // Start moving right when the right button is pressed
 });
 
-// Add event listener to stop the car when the button is released
+// Add touchstart and touchend event listeners for mobile devices
+document.getElementById("left").addEventListener("touchstart", function () {
+  startContinuousMovement("left"); // Start moving left when the left button is touched
+});
+
+document.getElementById("right").addEventListener("touchstart", function () {
+  startContinuousMovement("right"); // Start moving right when the right button is touched
+});
+
+document.addEventListener("touchend", function () {
+  if (isButtonDown) {
+    stopContinuousMovement(); // Stop car movement if the touch is released while it was down
+  }
+});
+
+// Add event listener to stop the car when the button is released (for desktop devices)
 document.addEventListener("mouseup", function () {
   if (isButtonDown) {
     stopContinuousMovement(); // Stop car movement if the button is released while it was down

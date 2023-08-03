@@ -31,31 +31,40 @@ class Car {
         this.leftButtonDown = false;
         this.rightButtonDown = false;
     
-        // Select the mobile-controls buttons
-        this.leftButton = document.getElementById('left');
-        this.rightButton = document.getElementById('right');
+      // Variables to track button presses
+    this.leftButtonDown = false;
+    this.rightButtonDown = false;
+    this.throttleDelay = 100; // Set the throttle delay in milliseconds
+
+    // Select the mobile-controls buttons
+    this.leftButton = document.getElementById('left');
+    this.rightButton = document.getElementById('right');
+
+    // Throttle the touchstart event listeners
+    this.throttledLeftStart = this.throttle(() => this.startMovingCar('left'), this.throttleDelay);
+    this.throttledRightStart = this.throttle(() => this.startMovingCar('right'), this.throttleDelay);
     
-        // Add touch event listeners to start/stop car movement
-        this.leftButton.addEventListener('touchstart', () => {
-          this.leftButtonDown = true;
-          this.startMovingCar('left');
-        });
-    
-        this.rightButton.addEventListener('touchstart', () => {
-          this.rightButtonDown = true;
-          this.startMovingCar('right');
-        });
-    
-        this.leftButton.addEventListener('touchend', () => {
-          this.leftButtonDown = false;
-          this.stopMovingCar();
-        });
-    
-        this.rightButton.addEventListener('touchend', () => {
-          this.rightButtonDown = false;
-          this.stopMovingCar();
-        });
-    
+    // Add touch event listeners to start/stop car movement
+    this.leftButton.addEventListener('touchstart', () => {
+      this.leftButtonDown = true;
+      this.throttledLeftStart();
+    });
+
+    this.rightButton.addEventListener('touchstart', () => {
+      this.rightButtonDown = true;
+      this.throttledRightStart();
+    });
+
+    this.leftButton.addEventListener('touchend', () => {
+      this.leftButtonDown = false;
+      this.stopMovingCar();
+    });
+
+    this.rightButton.addEventListener('touchend', () => {
+      this.rightButtonDown = false;
+      this.stopMovingCar();
+    });
+  
   
     }
     
@@ -108,18 +117,32 @@ class Car {
       }
     }
 
-    startMovingCar(direction) {
-      // Move the car repeatedly as long as the corresponding button is pressed
-      if (direction === 'left' && this.leftButtonDown && this.x > 5) {
-        this.x -= 3;
-        turn.play();
-        this.requestAnimationFrame = requestAnimationFrame(() => this.startMovingCar('left'));
-      } else if (direction === 'right' && this.rightButtonDown && this.x < myCanvas.width-40) {
-        this.x += 3;
-        turn.play();
-        this.requestAnimationFrame = requestAnimationFrame(() => this.startMovingCar('right'));
-      }
+    throttle(callback, delay) {
+      let lastCallTime = 0;
+      return function () {
+        const now = Date.now();
+        if (now - lastCallTime >= delay) {
+          lastCallTime = now;
+          callback.apply(this, arguments);
+        }
+      };
     }
+    
+startMovingCar(direction) {
+    // Move the car continuously as long as the corresponding button is pressed
+    if (direction === 'left' && this.leftButtonDown && this.x > 5) {
+      this.x -= 3;
+      turn.play();
+    } else if (direction === 'right' && this.rightButtonDown && this.x < myCanvas.width - 40) {
+      this.x += 3;
+      turn.play();
+    }
+
+    // Use requestAnimationFrame to keep moving the car continuously
+    if (this.leftButtonDown || this.rightButtonDown) {
+      this.requestAnimationFrame = requestAnimationFrame(() => this.startMovingCar(direction));
+    }
+  }
   
     stopMovingCar() {
       // Stop the car's movement when both buttons are released

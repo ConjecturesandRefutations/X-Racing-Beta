@@ -78,6 +78,8 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
   function startGame() {
 
+    cancelAnimationFrame(animationFrameId);
+
     drive.play();
     currentGame = new Game();
     ctx.drawImage(background, 0, 0,myCanvas.width,myCanvas.height); // draw background image

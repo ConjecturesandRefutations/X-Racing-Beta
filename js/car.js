@@ -110,11 +110,11 @@ class Car {
 
     startMovingCar(direction) {
       // Move the car repeatedly as long as the corresponding button is pressed
-      if (direction === 'left' && this.leftButtonDown) {
+      if (direction === 'left' && this.leftButtonDown && this.x > 5) {
         this.x -= 3;
         turn.play();
         this.requestAnimationFrame = requestAnimationFrame(() => this.startMovingCar('left'));
-      } else if (direction === 'right' && this.rightButtonDown) {
+      } else if (direction === 'right' && this.rightButtonDown && this.x < myCanvas.width-40) {
         this.x += 3;
         turn.play();
         this.requestAnimationFrame = requestAnimationFrame(() => this.startMovingCar('right'));

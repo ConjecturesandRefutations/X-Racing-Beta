@@ -172,11 +172,25 @@ button:hover{
   font-size: 50px;
 }
 
+.play-music{
+  position: absolute;
+  color: white;
+  background-color: black;
+}
+
 .music-credit{
   position: absolute;
   color: white;
   left: 5px;
   bottom: 0px;
+  font-size: x-small;
+}
+
+.closing-credits{
+  position: absolute;
+  color: white;
+  left: 5px;
+  top: 0px;
   font-size: x-small;
 }
 

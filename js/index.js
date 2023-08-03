@@ -44,17 +44,18 @@ myCanvas.style.display = 'none';
 toggleInfo.style.display = 'none';
 
 //Start Button
-
 window.onload = () => {
     opening.play();
-    toggleButton.onclick = () => {
+    toggleButton.onclick = (event) => {
+    event.stopPropagation();
+    pauseOpeningAudio();
     drive.play();
-    opening.pause();
     toggleOpening.style.display = 'none';
     myCanvas.style.display = '';
     toggleInfo.style.display = '';      
     startGame();
     };
+
   
     document.onkeydown = (e) => {
       let whereToGo = e.keyCode;
@@ -197,7 +198,9 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
       //Restart Button
       let restartButton = document.getElementsByClassName('try-again-button')
       for (let i = 0 ; i < restartButton.length; i++) {
-      restartButton[i].addEventListener('click',  ()=>{
+      restartButton[i].addEventListener('click',  (event)=>{
+      closing.pause()
+      event.stopPropagation();
       cancelAnimationFrame(animationFrameId);
       endScreen.style.display = 'none';
       toggleOpening.style.display = 'none';
@@ -213,6 +216,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
 
 
       function endGame(){
+        closing.play();
         isGameOver = true;
         currentCar.x = myCanvas.width/2
         currentCar.y = myCanvas.height/1.5

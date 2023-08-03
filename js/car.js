@@ -1,6 +1,7 @@
 let currentColor = 'blue';
 
 function handleColorChange(event) {
+  event.stopPropagation();
   if (event.target.checked) {
     currentColor = event.target.value;
     // Uncheck other checkboxes

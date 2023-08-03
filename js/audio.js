@@ -32,12 +32,14 @@ function pauseOpeningAudio() {
   openingAudioPlaying = false;
 }
 
+const openingAudio = document.querySelector('#audio-button');
+
 
 // Add a simple interaction event to play/pause the opening audio when the user clicks
-document.addEventListener('click', () => {
+openingAudio.onclick = () => {
   if (openingAudioPlaying) {
     pauseOpeningAudio();
   } else {
     playOpeningAudio();
   }
-});
+};

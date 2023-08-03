@@ -45,7 +45,6 @@ toggleInfo.style.display = 'none';
 
 //Start Button
 window.onload = () => {
-    opening.play();
     toggleButton.onclick = (event) => {
     event.stopPropagation();
     pauseOpeningAudio();

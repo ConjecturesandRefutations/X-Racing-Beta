@@ -173,9 +173,14 @@ button:hover{
 }
 
 .play-music{
+  cursor: pointer;
   position: absolute;
   color: white;
   background-color: black;
+  padding: none;
+}
+.fa{
+  color: red;
 }
 
 .music-credit{

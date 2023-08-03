@@ -139,14 +139,14 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     for(let i = 0; i<currentGame.obstacles.length; i++) {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
-/* 
+ 
      if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }   */
+        }   
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {

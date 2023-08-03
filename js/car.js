@@ -24,67 +24,6 @@ function handleColorChange(event) {
   }
 }
 
-// Function to handle mobile button clicks and call turnCar with the appropriate action
-function handleMobileButtonClick(action) {
-  currentCar.turnCar(action); // MoveCar with "left" or "right" action
-}
-
-// Function to continuously move the car in the specified direction
-let isButtonDown = false;
-let intervalId;
-
-function startContinuousMovement(action) {
-  isButtonDown = true;
-  intervalId = setInterval(function () {
-    currentCar.turnCar(action); // MoveCar with the specified action repeatedly
-  }, 100); // Adjust the interval as needed to control the speed of movement
-}
-
-function stopContinuousMovement() {
-  isButtonDown = false;
-  clearInterval(intervalId);
-}
-
-// Add click, touch, and hold event listeners to the mobile buttons
-document.getElementById("left").addEventListener("click", function () {
-  handleMobileButtonClick("left"); // Move left when the left button is clicked once
-});
-
-document.getElementById("right").addEventListener("click", function () {
-  handleMobileButtonClick("right"); // Move right when the right button is clicked once
-});
-
-document.getElementById("left").addEventListener("mousedown", function () {
-  startContinuousMovement("left"); // Start moving left when the left button is pressed
-});
-
-document.getElementById("right").addEventListener("mousedown", function () {
-  startContinuousMovement("right"); // Start moving right when the right button is pressed
-});
-
-// Add touchstart and touchend event listeners for mobile devices
-document.getElementById("left").addEventListener("touchstart", function () {
-  startContinuousMovement("left"); // Start moving left when the left button is touched
-});
-
-document.getElementById("right").addEventListener("touchstart", function () {
-  startContinuousMovement("right"); // Start moving right when the right button is touched
-});
-
-document.addEventListener("touchend", function () {
-  if (isButtonDown) {
-    stopContinuousMovement(); // Stop car movement if the touch is released while it was down
-  }
-});
-
-// Add event listener to stop the car when the button is released (for desktop devices)
-document.addEventListener("mouseup", function () {
-  if (isButtonDown) {
-    stopContinuousMovement(); // Stop car movement if the button is released while it was down
-  }
-});
-
-
 class Car {
     constructor(){
       this.x = canvas.width/2;
@@ -142,22 +81,32 @@ class Car {
          }
       }
     }
-     turnCar(action) {
-      ctx.clearRect(this.x, this.y, this.width, this.height);
-      switch (action) {
-          case "left": // left button pressed
-              if (this.x > 15) {
-                  this.x -= 10;
-                  turn.play();
-              }
-              break;
-          case "right": // right button pressed
-              if (this.x < 450) {
-                  this.x += 10;
-                  turn.play();
-              }
-              break;
-          // Add more cases for other actions if needed
-      }
+     // Method to handle continuous movement
+  startContinuousMovement(action) {
+    // Set the corresponding buttonPressed flag
+    if (action === "left") {
+      leftButtonPressed = true;
+    } else if (action === "right") {
+      rightButtonPressed = true;
+    }
+
+    // Check if continuous movement interval is already set to avoid overlapping intervals
+    if (!continuousMoveInterval) {
+      continuousMoveInterval = setInterval(() => {
+        if (leftButtonPressed) {
+          this.moveCar(37); // 37 corresponds to the keyCode for the left arrow key
+        } else if (rightButtonPressed) {
+          this.moveCar(39); // 39 corresponds to the keyCode for the right arrow key
+        }
+      }, 100); // Adjust the interval as needed to control the speed of movement
+    }
+  }
+
+  // Method to handle stopping continuous movement
+  stopContinuousMovement() {
+    leftButtonPressed = false;
+    rightButtonPressed = false;
+    clearInterval(continuousMoveInterval);
+    continuousMoveInterval = null;
   }
   }

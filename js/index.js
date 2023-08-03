@@ -89,16 +89,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     currentCar.drawCar();
     animationFrameId = requestAnimationFrame(updateCanvas);
 
-    // Remove touch event listeners before starting the game
-  currentCar.leftButton.removeEventListener('touchstart', currentCar.throttledLeftStart);
-  currentCar.rightButton.removeEventListener('touchstart', currentCar.throttledRightStart);
-  currentCar.leftButton.removeEventListener('touchend', currentCar.stopMovingCar);
-  currentCar.rightButton.removeEventListener('touchend', currentCar.stopMovingCar);
-  currentCar.leftButton.removeEventListener('mousedown', currentCar.throttledLeftStart);
-  currentCar.rightButton.removeEventListener('mousedown', currentCar.throttledRightStart);
-  currentCar.leftButton.removeEventListener('mouseup', currentCar.stopMovingCar);
-  currentCar.rightButton.removeEventListener('mouseup', currentCar.stopMovingCar);
-
   // Add touch event listeners
   addTouchListeners();
 }
@@ -222,7 +212,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
       restartButton[i].addEventListener('click',  (event)=>{
       closing.pause()
       event.stopPropagation();
-      cancelAnimationFrame(animationFrameId);
       endScreen.style.display = 'none';
       toggleOpening.style.display = 'none';
       myCanvas.style.display = 'block';
@@ -249,6 +238,15 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         mobile.style.display = 'none';
         scoreTwo.innerText = currentGame.score;
         levelTwo.innerText = currentGame.level;
+            // Remove touch event listeners before restarting the game
+        currentCar.leftButton.removeEventListener('touchstart', currentCar.throttledLeftStart);
+        currentCar.rightButton.removeEventListener('touchstart', currentCar.throttledRightStart);
+        currentCar.leftButton.removeEventListener('touchend', currentCar.stopMovingCar);
+        currentCar.rightButton.removeEventListener('touchend', currentCar.stopMovingCar);
+        currentCar.leftButton.removeEventListener('mousedown', currentCar.throttledLeftStart);
+        currentCar.rightButton.removeEventListener('mousedown', currentCar.throttledRightStart);
+        currentCar.leftButton.removeEventListener('mouseup', currentCar.stopMovingCar);
+        currentCar.rightButton.removeEventListener('mouseup', currentCar.stopMovingCar);``
       }
 
       requestAnimationFrame(updateCanvas);

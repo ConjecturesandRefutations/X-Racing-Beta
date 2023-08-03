@@ -24,27 +24,6 @@ let lastDifficultyUpdate = 0;
 
 let modulo = 30;
 
-// Function to handle mobile button clicks and call turnCar with the appropriate action
-function handleMobileButtonClick(action) {
-  currentCar.turnCar(action); // MoveCar with "left" or "right" action
-}
-
-// Function to continuously move the car in the specified direction
-let isButtonDown = false;
-let intervalId;
-
-function startContinuousMovement(action) {
-  isButtonDown = true;
-  intervalId = setInterval(function () {
-    currentCar.turnCar(action); // MoveCar with the specified action repeatedly
-  }, 100); // Adjust the interval as needed to control the speed of movement
-}
-
-function stopContinuousMovement() {
-  isButtonDown = false;
-  clearInterval(intervalId);
-}
-
 
 //Opening Area and Start Button
 
@@ -108,26 +87,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     currentCar.drawCar();
     animationFrameId = requestAnimationFrame(updateCanvas);
     
-    // Add event listeners for mobile devices
-document.getElementById("left").addEventListener("touchstart", function (event) {
-  event.preventDefault(); // Prevent default touch behavior
-  handleMobileButtonClick("left"); // Move left when the left button is touched
-});
-
-document.getElementById("right").addEventListener("touchstart", function (event) {
-  event.preventDefault(); // Prevent default touch behavior
-  handleMobileButtonClick("right"); // Move right when the right button is touched
-});
-
-document.getElementById("left").addEventListener("touchend", function (event) {
-  event.preventDefault(); // Prevent default touch behavior
-  stopContinuousMovement(); // Stop car movement if the touch is released
-});
-
-document.getElementById("right").addEventListener("touchend", function (event) {
-  event.preventDefault(); // Prevent default touch behavior
-  stopContinuousMovement(); // Stop car movement if the touch is released
-});
   }
 
   function updateCanvas() {
@@ -269,7 +228,8 @@ document.getElementById("right").addEventListener("touchend", function (event) {
         toggleOpening.style.display = 'none'
         toggleInfo.style.display = 'none'
         myCanvas.style.display = 'none'
-        endScreen.style.display = ''
+        endScreen.style.display = '';
+        mobile.style.display = 'none';
         scoreTwo.innerText = currentGame.score;
         levelTwo.innerText = currentGame.level;
       }

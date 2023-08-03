@@ -1,8 +1,4 @@
 let currentColor = 'blue';
-let leftButtonPressed = false;
-let rightButtonPressed = false;
-let continuousMoveInterval = null; 
-
 
 function handleColorChange(event) {
   event.stopPropagation();
@@ -31,6 +27,19 @@ class Car {
       this.width = 30;
       this.height = 50;
       this.img = this.getImagePath();
+       // Select the mobile-controls buttons
+    this.leftButton = document.getElementById('left');
+    this.rightButton = document.getElementById('right');
+
+    // Add event listeners to the buttons
+    this.leftButton.addEventListener('click', () => {
+      this.moveCar(37); // 37 is the keycode for the left arrow key
+    });
+
+    this.rightButton.addEventListener('click', () => {
+      this.moveCar(39); // 39 is the keycode for the right arrow key
+    });
+  
     }
     
     getImagePath() {
@@ -81,32 +90,5 @@ class Car {
          }
       }
     }
-     // Method to handle continuous movement
-  startContinuousMovement(action) {
-    // Set the corresponding buttonPressed flag
-    if (action === "left") {
-      leftButtonPressed = true;
-    } else if (action === "right") {
-      rightButtonPressed = true;
-    }
-
-    // Check if continuous movement interval is already set to avoid overlapping intervals
-    if (!continuousMoveInterval) {
-      continuousMoveInterval = setInterval(() => {
-        if (leftButtonPressed) {
-          this.moveCar(37); // 37 corresponds to the keyCode for the left arrow key
-        } else if (rightButtonPressed) {
-          this.moveCar(39); // 39 corresponds to the keyCode for the right arrow key
-        }
-      }, 100); // Adjust the interval as needed to control the speed of movement
-    }
-  }
-
-  // Method to handle stopping continuous movement
-  stopContinuousMovement() {
-    leftButtonPressed = false;
-    rightButtonPressed = false;
-    clearInterval(continuousMoveInterval);
-    continuousMoveInterval = null;
-  }
+     
   }

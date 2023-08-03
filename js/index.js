@@ -221,10 +221,10 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
           // Set the flag to true to indicate restart in progress
           isRestarting = true;
       
-          closing.pause();
+          myCanvas.style.display = 'block';
           endScreen.style.display = 'none';
           toggleOpening.style.display = 'none';
-          myCanvas.style.display = 'block';
+          closing.pause();
           toggleInfo.style.display = '';
           mobile.style.display = '';
           isGameOver = false;

@@ -20,6 +20,50 @@ function handleColorChange(event) {
   }
 }
 
+function addTouchListeners() {
+  currentCar.leftButton.addEventListener('touchstart', () => {
+    currentCar.leftButtonDown = true;
+    currentCar.throttledLeftStart();
+  });
+
+  currentCar.rightButton.addEventListener('touchstart', () => {
+    currentCar.rightButtonDown = true;
+    currentCar.throttledRightStart();
+  });
+
+  currentCar.leftButton.addEventListener('touchend', () => {
+    currentCar.leftButtonDown = false;
+    currentCar.stopMovingCar();
+  });
+
+  currentCar.rightButton.addEventListener('touchend', () => {
+    currentCar.rightButtonDown = false;
+    currentCar.stopMovingCar();
+  });
+
+  // Mouse event listeners
+  currentCar.leftButton.addEventListener('mousedown', () => {
+    currentCar.leftButtonDown = true;
+    currentCar.throttledLeftStart();
+  });
+
+  currentCar.rightButton.addEventListener('mousedown', () => {
+    currentCar.rightButtonDown = true;
+    currentCar.throttledRightStart();
+  });
+
+  currentCar.leftButton.addEventListener('mouseup', () => {
+    currentCar.leftButtonDown = false;
+    currentCar.stopMovingCar();
+  });
+
+  currentCar.rightButton.addEventListener('mouseup', () => {
+    currentCar.rightButtonDown = false;
+    currentCar.stopMovingCar();
+  });
+}
+
+
 class Car {
     constructor(){
       this.x = canvas.width/2;
@@ -43,27 +87,6 @@ class Car {
     // Throttle the touchstart event listeners
     this.throttledLeftStart = this.throttle(() => this.startMovingCar('left'), this.throttleDelay);
     this.throttledRightStart = this.throttle(() => this.startMovingCar('right'), this.throttleDelay);
-    
-    // Add touch event listeners to start/stop car movement
-    this.leftButton.addEventListener('touchstart', () => {
-      this.leftButtonDown = true;
-      this.throttledLeftStart();
-    });
-
-    this.rightButton.addEventListener('touchstart', () => {
-      this.rightButtonDown = true;
-      this.throttledRightStart();
-    });
-
-    this.leftButton.addEventListener('touchend', () => {
-      this.leftButtonDown = false;
-      this.stopMovingCar();
-    });
-
-    this.rightButton.addEventListener('touchend', () => {
-      this.rightButtonDown = false;
-      this.stopMovingCar();
-    });
   
   
     }

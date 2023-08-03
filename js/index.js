@@ -88,8 +88,22 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     currentCar = new Car();
     currentCar.drawCar();
     animationFrameId = requestAnimationFrame(updateCanvas);
+
+    // Remove touch event listeners before starting the game
+  currentCar.leftButton.removeEventListener('touchstart', currentCar.throttledLeftStart);
+  currentCar.rightButton.removeEventListener('touchstart', currentCar.throttledRightStart);
+  currentCar.leftButton.removeEventListener('touchend', currentCar.stopMovingCar);
+  currentCar.rightButton.removeEventListener('touchend', currentCar.stopMovingCar);
+  currentCar.leftButton.removeEventListener('mousedown', currentCar.throttledLeftStart);
+  currentCar.rightButton.removeEventListener('mousedown', currentCar.throttledRightStart);
+  currentCar.leftButton.removeEventListener('mouseup', currentCar.stopMovingCar);
+  currentCar.rightButton.removeEventListener('mouseup', currentCar.stopMovingCar);
+
+  // Add touch event listeners
+  addTouchListeners();
+}
     
-  }
+  
 
   function updateCanvas() {
 

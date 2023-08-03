@@ -27,18 +27,35 @@ class Car {
       this.width = 30;
       this.height = 50;
       this.img = this.getImagePath();
-       // Select the mobile-controls buttons
-    this.leftButton = document.getElementById('left');
-    this.rightButton = document.getElementById('right');
-
-    // Add touch event listeners to the buttons
-    this.leftButton.addEventListener('touchstart', () => {
-      this.moveCar(37); // 37 is the keycode for the left arrow key
-    });
-
-    this.rightButton.addEventListener('touchstart', () => {
-      this.moveCar(39); // 39 is the keycode for the right arrow key
-    });
+        // Variables to track button presses
+        this.leftButtonDown = false;
+        this.rightButtonDown = false;
+    
+        // Select the mobile-controls buttons
+        this.leftButton = document.getElementById('left');
+        this.rightButton = document.getElementById('right');
+    
+        // Add touch event listeners to start/stop car movement
+        this.leftButton.addEventListener('touchstart', () => {
+          this.leftButtonDown = true;
+          this.startMovingCar('left');
+        });
+    
+        this.rightButton.addEventListener('touchstart', () => {
+          this.rightButtonDown = true;
+          this.startMovingCar('right');
+        });
+    
+        this.leftButton.addEventListener('touchend', () => {
+          this.leftButtonDown = false;
+          this.stopMovingCar();
+        });
+    
+        this.rightButton.addEventListener('touchend', () => {
+          this.rightButtonDown = false;
+          this.stopMovingCar();
+        });
+    
   
     }
     
@@ -88,6 +105,26 @@ class Car {
              this.y += 10;
              turn.play();
          }
+      }
+    }
+
+    startMovingCar(direction) {
+      // Move the car repeatedly as long as the corresponding button is pressed
+      if (direction === 'left' && this.leftButtonDown) {
+        this.x -= 3;
+        turn.play();
+        this.requestAnimationFrame = requestAnimationFrame(() => this.startMovingCar('left'));
+      } else if (direction === 'right' && this.rightButtonDown) {
+        this.x += 3;
+        turn.play();
+        this.requestAnimationFrame = requestAnimationFrame(() => this.startMovingCar('right'));
+      }
+    }
+  
+    stopMovingCar() {
+      // Stop the car's movement when both buttons are released
+      if (!this.leftButtonDown && !this.rightButtonDown) {
+        cancelAnimationFrame(this.requestAnimationFrame);
       }
     }
      

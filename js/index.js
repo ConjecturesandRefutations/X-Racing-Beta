@@ -211,6 +211,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
       toggleOpening.style.display = 'none';
       myCanvas.style.display = 'block';
       toggleInfo.style.display = '' ;
+      mobile.style.display = '';
       isGameOver = false;
       obstacleSpeed = 3;
       resetScore();

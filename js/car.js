@@ -1,4 +1,6 @@
 let currentColor = 'blue';
+let leftArrowPressed = false;
+let rightArrowPressed = false;
 
 function handleColorChange(event) {
   event.stopPropagation();

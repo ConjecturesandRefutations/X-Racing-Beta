@@ -1,6 +1,8 @@
 let currentColor = 'blue';
-let leftArrowPressed = false;
-let rightArrowPressed = false;
+let leftButtonPressed = false;
+let rightButtonPressed = false;
+let continuousMoveInterval = null; 
+
 
 function handleColorChange(event) {
   event.stopPropagation();
@@ -22,16 +24,51 @@ function handleColorChange(event) {
   }
 }
 
-function addMobileEventListeners() {
-  // Event listeners for left and right buttons on mobile
-  document.getElementById("left").addEventListener("click", function() {
-      moveCar("left"); // MoveCar with "left" action
-  });
-
-  document.getElementById("right").addEventListener("click", function() {
-      moveCar("right"); // MoveCar with "right" action
-  });
+// Function to handle mobile button clicks and call turnCar with the appropriate action
+function handleMobileButtonClick(action) {
+  currentCar.turnCar(action); // MoveCar with "left" or "right" action
 }
+
+// Function to continuously move the car in the specified direction
+let isButtonDown = false;
+let intervalId;
+
+function startContinuousMovement(action) {
+  isButtonDown = true;
+  intervalId = setInterval(function () {
+    currentCar.turnCar(action); // MoveCar with the specified action repeatedly
+  }, 100);
+}
+
+function stopContinuousMovement() {
+  isButtonDown = false;
+  clearInterval(intervalId);
+}
+
+// Add click and hold event listeners to the mobile buttons
+document.getElementById("left").addEventListener("click", function () {
+  handleMobileButtonClick("left"); // Move left when the left button is clicked once
+});
+
+document.getElementById("right").addEventListener("click", function () {
+  handleMobileButtonClick("right"); // Move right when the right button is clicked once
+});
+
+document.getElementById("left").addEventListener("mousedown", function () {
+  startContinuousMovement("left"); // Start moving left when the left button is pressed
+});
+
+document.getElementById("right").addEventListener("mousedown", function () {
+  startContinuousMovement("right"); // Start moving right when the right button is pressed
+});
+
+// Add event listener to stop the car when the button is released
+document.addEventListener("mouseup", function () {
+  if (isButtonDown) {
+    stopContinuousMovement(); // Stop car movement if the button is released while it was down
+  }
+});
+
 
 class Car {
     constructor(){

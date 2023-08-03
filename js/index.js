@@ -63,20 +63,10 @@ window.onload = () => {
       let whereToGo = e.keyCode;
       currentCar.moveCar(whereToGo);
   }
-  // Function to handle mobile button clicks and call turnCar with the appropriate action
-function handleMobileButtonClick(action) {
-  currentCar.turnCar(action); // MoveCar with "left" or "right" action
-}
 
-// Add click event listeners to the mobile buttons
-document.getElementById("left").addEventListener("click", function() {
-  handleMobileButtonClick("left"); // Pass "left" action when the left button is clicked
-});
-
-document.getElementById("right").addEventListener("click", function() {
-  handleMobileButtonClick("right"); // Pass "right" action when the right button is clicked
-});
   };
+
+  
 
   //Main Menu Button
 let mainMenuButton = document.getElementsByClassName('main-menu-button')

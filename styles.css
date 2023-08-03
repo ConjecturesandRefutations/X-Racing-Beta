@@ -199,6 +199,17 @@ button:hover{
   font-size: x-small;
 }
 
+.mobile-controls{
+  color: white;
+  display: none;
+}
+
+#left,
+#right{
+  font-size: 100px;
+  white-space: nowrap;
+}
+
 @media(max-width:630px){
 .opening-text  {
   width: 90%;
@@ -211,3 +222,30 @@ button:hover{
   display: none;
 }
 }
+
+@media(max-width:960px){
+  #canvas  {
+    width: 60%;
+    height: 60%;
+  }
+  .stats{
+    top: 0px;
+  }
+  #level{
+    font-size: 70px;
+  }
+  .mobile-controls{
+    display: block;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
+    bottom: 0;
+  }
+  }
+
+
+  @media(max-width:600px){
+    #left,#right{
+      font-size: 50px;
+    }
+  }

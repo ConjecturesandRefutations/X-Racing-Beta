@@ -31,9 +31,11 @@ const toggleButton = document.querySelector('#start-button');
 const toggleOpening = document.querySelector('.opening-section');
 const toggleInfo = document.querySelector('.info');
 const endScreen = document.querySelector('.full-time')
+const mobile = document.querySelector('.mobile-controls')
 
 toggleOpening.style.display = '';
 endScreen.style.display = 'none';
+mobile.style.display = 'none';
 
 
 //Game Area
@@ -52,6 +54,7 @@ window.onload = () => {
     toggleOpening.style.display = 'none';
     myCanvas.style.display = '';
     toggleInfo.style.display = '';      
+    mobile.style.display = '';
     startGame();
     };
 
@@ -60,6 +63,19 @@ window.onload = () => {
       let whereToGo = e.keyCode;
       currentCar.moveCar(whereToGo);
   }
+  // Function to handle mobile button clicks and call turnCar with the appropriate action
+function handleMobileButtonClick(action) {
+  currentCar.turnCar(action); // MoveCar with "left" or "right" action
+}
+
+// Add click event listeners to the mobile buttons
+document.getElementById("left").addEventListener("click", function() {
+  handleMobileButtonClick("left"); // Pass "left" action when the left button is clicked
+});
+
+document.getElementById("right").addEventListener("click", function() {
+  handleMobileButtonClick("right"); // Pass "right" action when the right button is clicked
+});
   };
 
   //Main Menu Button
@@ -123,14 +139,14 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     for(let i = 0; i<currentGame.obstacles.length; i++) {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
-
+/* 
      if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }  
+        }   */
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {

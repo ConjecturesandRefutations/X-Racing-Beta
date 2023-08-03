@@ -20,6 +20,16 @@ function handleColorChange(event) {
   }
 }
 
+function addMobileEventListeners() {
+  // Event listeners for left and right buttons on mobile
+  document.getElementById("left").addEventListener("click", function() {
+      moveCar("left"); // MoveCar with "left" action
+  });
+
+  document.getElementById("right").addEventListener("click", function() {
+      moveCar("right"); // MoveCar with "right" action
+  });
+}
 
 class Car {
     constructor(){
@@ -49,6 +59,7 @@ class Car {
       ctx.drawImage(carImg, this.x, this.y, this.width, this.height);
     }
 
+
     moveCar(keyCode){
       ctx.clearRect(this.x, this.y, this.width, this.height);
       switch(keyCode){
@@ -77,4 +88,22 @@ class Car {
          }
       }
     }
+     turnCar(action) {
+      ctx.clearRect(this.x, this.y, this.width, this.height);
+      switch (action) {
+          case "left": // left button pressed
+              if (this.x > 15) {
+                  this.x -= 10;
+                  turn.play();
+              }
+              break;
+          case "right": // right button pressed
+              if (this.x < 450) {
+                  this.x += 10;
+                  turn.play();
+              }
+              break;
+          // Add more cases for other actions if needed
+      }
+  }
   }

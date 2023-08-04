@@ -24,6 +24,8 @@ let lastDifficultyUpdate = 0;
 
 let modulo = 30;
 
+let isRestarting = false; // A flag to prevent multiple restarts
+
 
 //Opening Area and Start Button
 
@@ -75,19 +77,15 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     location.reload() 
   })  
 }
-
-  function startGame() {
-
-    cancelAnimationFrame(animationFrameId);
-
-    drive.play();
-    currentGame = new Game();
-    ctx.drawImage(background, 0, 0,myCanvas.width,myCanvas.height); // draw background image
-  
-    //Instantiate a new Car
-    currentCar = new Car();
-    currentCar.drawCar();
-    animationFrameId = requestAnimationFrame(updateCanvas);
+function startGame() {
+  cancelAnimationFrame(animationFrameId);
+  drive.play();
+  currentGame = new Game();
+  ctx.drawImage(background, 0, 0, myCanvas.width, myCanvas.height); // draw background image
+  // Instantiate a new Car
+  currentCar = new Car();
+  currentCar.drawCar();
+  animationFrameId = requestAnimationFrame(updateCanvas);
 
   // Add touch event listeners
   if (!isGameOver) {
@@ -208,43 +206,39 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         modulo = 30;
       }
 
-      //Restart Button
-      let restartButton = document.getElementsByClassName('try-again-button')
-      let isRestarting = false;
-      for (let i = 0; i < restartButton.length; i++) {
-        restartButton[i].addEventListener('click', (event) => {
-          event.stopPropagation();
-      
-          // Check if restart is already in progress
-          if (isRestarting) return;
-      
-          // Set the flag to true to indicate restart in progress
-          isRestarting = true;
-      
-          myCanvas.style.display = 'block';
-          endScreen.style.display = 'none';
-          toggleOpening.style.display = 'none';
-          closing.pause();
-          toggleInfo.style.display = '';
-          mobile.style.display = '';
-          isGameOver = false;
-          obstacleSpeed = 3;
-          resetScore();
-      
-          // Remove the previous event listeners from the currentCar object
-          currentCar.removeEventListeners();
-      
-          // Start the game again
-          startGame().then(() => {
-            // Reset the restart flag after the restart process is complete
-            isRestarting = false;
-          });
-        });
-      }
+const restartButton = document.querySelector('#restart-button');
+restartButton.addEventListener('click', restartGame);
 
+function restartGame() {
+  if (isRestarting) return;
+  isRestarting = true;
+  currentCar.removeEventListeners();
+  myCanvas.style.display = 'block';
+  endScreen.style.display = 'none';
+  toggleOpening.style.display = 'none';
+  closing.pause();
+  toggleInfo.style.display = '';
+  mobile.style.display = '';
+  isGameOver = false;
+  obstacleSpeed = 3;
+  resetScore();
+  startGame();
+  isRestarting = false;
+  restartButton.addEventListener('click', restartGame);
+}
+
+function resetScore() {
+  currentGame.score = 0;
+  scoreDisplay.innerText = 0;
+  currentGame.level = 1;
+  level.innerText = currentGame.level;
+  lastDifficultyUpdate = 0;
+  modulo = 30;
+}
 
 
       function endGame(){
+        currentCar.removeEventListeners();
         closing.play();
         isGameOver = true;
         currentCar.x = myCanvas.width/2
@@ -256,12 +250,11 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
         mobile.style.display = 'none';
         scoreTwo.innerText = currentGame.score;
         levelTwo.innerText = currentGame.level;
-            // Remove touch event listeners before restarting the game
-            isGameRunning = false;
-
       }
 
-      requestAnimationFrame(updateCanvas);
+      if (!isGameOver) {
+        requestAnimationFrame(updateCanvas);
+      }
 
   }
 

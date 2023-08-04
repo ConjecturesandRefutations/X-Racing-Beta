@@ -87,7 +87,8 @@ class Car {
     // Throttle the touchstart event listeners
     this.throttledLeftStart = this.throttle(() => this.startMovingCar('left'), this.throttleDelay);
     this.throttledRightStart = this.throttle(() => this.startMovingCar('right'), this.throttleDelay);
-  
+
+    this.isCarMoving = false;
   
     }
     
@@ -174,15 +175,4 @@ startMovingCar(direction) {
       }
     }
 
-    removeEventListeners() {
-      this.leftButton.removeEventListener('touchstart', this.throttledLeftStart);
-      this.rightButton.removeEventListener('touchstart', this.throttledRightStart);
-      this.leftButton.removeEventListener('touchend', this.stopMovingCar);
-      this.rightButton.removeEventListener('touchend', this.stopMovingCar);
-      this.leftButton.removeEventListener('mousedown', this.throttledLeftStart);
-      this.rightButton.removeEventListener('mousedown', this.throttledRightStart);
-      this.leftButton.removeEventListener('mouseup', this.stopMovingCar);
-      this.rightButton.removeEventListener('mouseup', this.stopMovingCar);
-    }
-     
   }

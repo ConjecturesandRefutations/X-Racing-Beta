@@ -212,8 +212,8 @@ restartButton.addEventListener('click', restartGame);
 function restartGame() {
   if (isRestarting) return;
   isRestarting = true;
-  currentCar.removeEventListeners();
-  myCanvas.style.display = 'block';
+/*   currentCar.removeEventListeners();
+ */  myCanvas.style.display = 'block';
   endScreen.style.display = 'none';
   toggleOpening.style.display = 'none';
   closing.pause();
@@ -224,7 +224,6 @@ function restartGame() {
   resetScore();
   startGame();
   isRestarting = false;
-  restartButton.addEventListener('click', restartGame);
 }
 
 function resetScore() {
@@ -238,7 +237,6 @@ function resetScore() {
 
 
       function endGame(){
-        currentCar.removeEventListeners();
         closing.play();
         isGameOver = true;
         currentCar.x = myCanvas.width/2

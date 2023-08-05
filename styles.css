@@ -209,6 +209,11 @@ button:hover{
   font-size: 100px;
   white-space: nowrap;
 }
+#left:hover,
+#right:hover{
+  background-color: red;
+  color: black;
+}
 
 @media(max-width:630px){
 .opening-text  {

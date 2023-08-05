@@ -19,7 +19,7 @@ function handleColorChange(event) {
     }
   }
 }
-
+/* 
 function addTouchListeners() {
   currentCar.leftButton.addEventListener('touchstart', () => {
     currentCar.leftButtonDown = true;
@@ -61,7 +61,54 @@ function addTouchListeners() {
     currentCar.rightButtonDown = false;
     currentCar.stopMovingCar();
   });
+} */
+
+function addTouchListeners() {
+  // Touch event handling for leftButton
+  currentCar.leftButton.ontouchstart = () => {
+    currentCar.leftButtonDown = true;
+    currentCar.throttledLeftStart();
+  };
+
+  currentCar.leftButton.ontouchend = () => {
+    currentCar.leftButtonDown = false;
+    currentCar.stopMovingCar();
+  };
+
+  // Touch event handling for rightButton
+  currentCar.rightButton.ontouchstart = () => {
+    currentCar.rightButtonDown = true;
+    currentCar.throttledRightStart();
+  };
+
+  currentCar.rightButton.ontouchend = () => {
+    currentCar.rightButtonDown = false;
+    currentCar.stopMovingCar();
+  };
+
+  // Mouse event handling for leftButton
+  currentCar.leftButton.onmousedown = () => {
+    currentCar.leftButtonDown = true;
+    currentCar.throttledLeftStart();
+  };
+
+  currentCar.leftButton.onmouseup = () => {
+    currentCar.leftButtonDown = false;
+    currentCar.stopMovingCar();
+  };
+
+  // Mouse event handling for rightButton
+  currentCar.rightButton.onmousedown = () => {
+    currentCar.rightButtonDown = true;
+    currentCar.throttledRightStart();
+  };
+
+  currentCar.rightButton.onmouseup = () => {
+    currentCar.rightButtonDown = false;
+    currentCar.stopMovingCar();
+  };
 }
+
 
 
 class Car {

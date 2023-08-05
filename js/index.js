@@ -60,15 +60,11 @@ window.onload = () => {
     startGame();
     };
 
-  
     document.onkeydown = (e) => {
       let whereToGo = e.keyCode;
       currentCar.moveCar(whereToGo);
   }
-
   };
-
-  
 
   //Main Menu Button
 let mainMenuButton = document.getElementsByClassName('main-menu-button')
@@ -229,7 +225,7 @@ function resetScore() {
         closing.play();
         isGameOver = true;
         currentCar.x = myCanvas.width/2
-        currentCar.y = myCanvas.height/1.5
+        currentCar.y = myCanvas.height/1.25
         toggleOpening.style.display = 'none'
         toggleInfo.style.display = 'none'
         myCanvas.style.display = 'none'

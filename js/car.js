@@ -67,12 +67,10 @@ function addTouchListeners() {
   };
 }
 
-
-
 class Car {
     constructor(){
       this.x = canvas.width/2;
-      this.y = canvas.height/1.5;
+      this.y = canvas.height/1.25;
       this.width = 30;
       this.height = 50;
       this.img = this.getImagePath();
@@ -94,7 +92,9 @@ class Car {
     this.throttledRightStart = this.throttle(() => this.startMovingCar('right'), this.throttleDelay);
 
     this.isCarMoving = false;
-  
+
+    this.throttleDelay = 100; // Set the throttle delay in milliseconds for keyboard controls
+    
     }
     
     getImagePath() {
@@ -118,7 +118,6 @@ class Car {
 
 
     moveCar(keyCode){
-      ctx.clearRect(this.x, this.y, this.width, this.height);
       switch(keyCode){
         case 37: //left
         if(this.x > 15){

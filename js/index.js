@@ -225,19 +225,6 @@ function resetScore() {
         }
       }
 
-        //To reset the score
-      function resetScore(){
-        currentGame.score = 0;
-        scoreDisplay.innerText = 0;
-        currentGame.level = 1;
-        level.innerText = currentGame.level;
-        lastDifficultyUpdate = 0;
-        modulo = 30;
-      }
-
-
-
-
       function endGame(){
         closing.play();
         isGameOver = true;

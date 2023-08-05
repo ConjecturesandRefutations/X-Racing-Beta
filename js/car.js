@@ -174,9 +174,10 @@ startMovingCar(direction) {
   }
   
   stopMovingCar() {
-    this.leftButtonDown = false;
-    this.rightButtonDown = false;
-    cancelAnimationFrame(this.requestAnimationFrame);
+    // Stop the car's movement when both buttons are released
+    if (!this.leftButtonDown && !this.rightButtonDown) {
+      cancelAnimationFrame(this.requestAnimationFrame);
+    }
   }
 
   }

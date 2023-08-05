@@ -19,49 +19,7 @@ function handleColorChange(event) {
     }
   }
 }
-/* 
-function addTouchListeners() {
-  currentCar.leftButton.addEventListener('touchstart', () => {
-    currentCar.leftButtonDown = true;
-    currentCar.throttledLeftStart();
-  });
 
-  currentCar.rightButton.addEventListener('touchstart', () => {
-    currentCar.rightButtonDown = true;
-    currentCar.throttledRightStart();
-  });
-
-  currentCar.leftButton.addEventListener('touchend', () => {
-    currentCar.leftButtonDown = false;
-    currentCar.stopMovingCar();
-  });
-
-  currentCar.rightButton.addEventListener('touchend', () => {
-    currentCar.rightButtonDown = false;
-    currentCar.stopMovingCar();
-  });
-
-  // Mouse event listeners
-  currentCar.leftButton.addEventListener('mousedown', () => {
-    currentCar.leftButtonDown = true;
-    currentCar.throttledLeftStart();
-  });
-
-  currentCar.rightButton.addEventListener('mousedown', () => {
-    currentCar.rightButtonDown = true;
-    currentCar.throttledRightStart();
-  });
-
-  currentCar.leftButton.addEventListener('mouseup', () => {
-    currentCar.leftButtonDown = false;
-    currentCar.stopMovingCar();
-  });
-
-  currentCar.rightButton.addEventListener('mouseup', () => {
-    currentCar.rightButtonDown = false;
-    currentCar.stopMovingCar();
-  });
-} */
 
 function addTouchListeners() {
   // Touch event handling for leftButton

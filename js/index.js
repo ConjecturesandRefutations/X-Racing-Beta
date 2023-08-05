@@ -24,9 +24,6 @@ let lastDifficultyUpdate = 0;
 
 let modulo = 30;
 
-let isRestarting = false; // A flag to prevent multiple restarts
-
-
 //Opening Area and Start Button
 
 const toggleButton = document.querySelector('#start-button');
@@ -38,6 +35,9 @@ const mobile = document.querySelector('.mobile-controls')
 toggleOpening.style.display = '';
 endScreen.style.display = 'none';
 mobile.style.display = 'none';
+
+const loadingElement = document.getElementById('loading');
+loadingElement.style.display='none';
 
 
 //Game Area
@@ -68,8 +68,6 @@ window.onload = () => {
 
   };
 
-  
-
   //Main Menu Button
 let mainMenuButton = document.getElementsByClassName('main-menu-button')
 for (let i = 0 ; i < mainMenuButton.length; i++) {
@@ -78,6 +76,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
   })  
 }
 function startGame() {
+  loadingElement.style.display = 'none';
   cancelAnimationFrame(animationFrameId);
   drive.play();
   currentGame = new Game();
@@ -210,10 +209,8 @@ const restartButton = document.querySelector('#restart-button');
 restartButton.addEventListener('click', restartGame);
 
 function restartGame() {
-  if (isRestarting) return;
-  isRestarting = true;
-/*   currentCar.removeEventListeners();
- */  myCanvas.style.display = 'block';
+  loadingElement.style.display = 'block';
+  myCanvas.style.display = 'block';
   endScreen.style.display = 'none';
   toggleOpening.style.display = 'none';
   closing.pause();
@@ -223,7 +220,6 @@ function restartGame() {
   obstacleSpeed = 3;
   resetScore();
   startGame();
-  isRestarting = false;
 }
 
 function resetScore() {

@@ -204,6 +204,8 @@ const restartButton = document.querySelector('#restart-button');
 restartButton.addEventListener('click', restartGame);
 
 function restartGame() {
+  const loadingScreen = document.getElementById('loading-screen');
+  loadingScreen.style.display = 'block';
   myCanvas.style.display = 'block';
   endScreen.style.display = 'none';
   toggleOpening.style.display = 'none';
@@ -213,7 +215,16 @@ function restartGame() {
   isGameOver = false;
   obstacleSpeed = 3;
   resetScore();
-  startGame();
+
+  // Load the background image
+  background.onload = () => {
+    // The background image is loaded, so now we can start the game
+    loadingScreen.style.display = 'none'; // Hide the loading screen
+    startGame(); // Start the game
+  };
+
+  // Set the background source (This will trigger the 'onload' event)
+  background.src = "./images/road.png";
 }
 
       function endGame(){

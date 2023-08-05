@@ -24,6 +24,9 @@ let lastDifficultyUpdate = 0;
 
 let modulo = 30;
 
+let isRestarting = false; // A flag to prevent multiple restarts
+
+
 //Opening Area and Start Button
 
 const toggleButton = document.querySelector('#start-button');
@@ -35,6 +38,7 @@ const mobile = document.querySelector('.mobile-controls')
 toggleOpening.style.display = '';
 endScreen.style.display = 'none';
 mobile.style.display = 'none';
+
 
 //Game Area
 const myCanvas = document.getElementById('canvas');
@@ -64,6 +68,8 @@ window.onload = () => {
 
   };
 
+  
+
   //Main Menu Button
 let mainMenuButton = document.getElementsByClassName('main-menu-button')
 for (let i = 0 ; i < mainMenuButton.length; i++) {
@@ -85,6 +91,35 @@ function startGame() {
   if (!isGameOver) {
     addTouchListeners();
   }
+
+  const restartButton = document.querySelector('#restart-button');
+restartButton.addEventListener('click', restartGame);
+
+function restartGame() {
+  if (isRestarting) return;
+  isRestarting = true;
+  myCanvas.style.display = 'block';
+  endScreen.style.display = 'none';
+  toggleOpening.style.display = 'none';
+  closing.pause();
+  toggleInfo.style.display = '';
+  mobile.style.display = '';
+  isGameOver = false;
+  obstacleSpeed = 3;
+  resetScore();
+  startGame();
+  isRestarting = false;
+  restartButton.addEventListener('click', restartGame);
+}
+
+function resetScore() {
+  currentGame.score = 0;
+  scoreDisplay.innerText = 0;
+  currentGame.level = 1;
+  level.innerText = currentGame.level;
+  lastDifficultyUpdate = 0;
+  modulo = 30;
+}
 }
     
   
@@ -200,44 +235,8 @@ function startGame() {
         modulo = 30;
       }
 
-      
-      
-        const restartButton = document.querySelector('#restart-button');
-restartButton.addEventListener('click', () => {
-  const loadingScreen = document.getElementById('loading-screen');
-  loadingScreen.style.display = 'block';
 
-  // Load the background image and start the game after it's loaded
-  loadBackgroundImage().then(() => {
-    loadingScreen.style.display = 'none'; // Hide the loading screen
-    restartGame(); // Call restartGame() to handle the restart logic
-  });
-});
 
-function restartGame() {
-  myCanvas.style.display = 'block';
-  endScreen.style.display = 'none';
-  toggleOpening.style.display = 'none';
-  closing.pause();
-  toggleInfo.style.display = '';
-  mobile.style.display = '';
-  isGameOver = false;
-  obstacleSpeed = 3;
-  resetScore();
-
-  // Start the game
-  startGame();
-}
-
-      
-
-function loadBackgroundImage() {
-return new Promise((resolve, reject) => {
-  background.onload = resolve;
-  background.onerror = reject;
-  background.src = "./images/road.png"; // Set the background source (This will trigger the 'onload' event)
-});
-}
 
       function endGame(){
         closing.play();

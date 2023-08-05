@@ -200,34 +200,35 @@ function startGame() {
         modulo = 30;
       }
 
-      const restartButton = document.querySelector('#restart-button');
-      restartButton.addEventListener('click', () => {
-        const loadingScreen = document.getElementById('loading-screen');
-        loadingScreen.style.display = 'block';
       
-        // Load the background image and start the game after it's loaded
-        loadBackgroundImage().then(() => {
-          // The background image is loaded, so now we can call the restartGame() function
-          loadingScreen.style.display = 'none'; // Hide the loading screen
-          restartGame(); // Call restartGame() to handle the rest of the restart logic
-        });
-      });
       
-      function restartGame() {
-        // The rest of the restart logic 
-        myCanvas.style.display = 'block';
-        endScreen.style.display = 'none';
-        toggleOpening.style.display = 'none';
-        closing.pause();
-        toggleInfo.style.display = '';
-        mobile.style.display = '';
-        isGameOver = false;
-        obstacleSpeed = 3;
-        resetScore();
-      
-        // Start the game
-        startGame();
-      }
+        const restartButton = document.querySelector('#restart-button');
+restartButton.addEventListener('click', () => {
+  const loadingScreen = document.getElementById('loading-screen');
+  loadingScreen.style.display = 'block';
+
+  // Load the background image and start the game after it's loaded
+  loadBackgroundImage().then(() => {
+    loadingScreen.style.display = 'none'; // Hide the loading screen
+    restartGame(); // Call restartGame() to handle the restart logic
+  });
+});
+
+function restartGame() {
+  myCanvas.style.display = 'block';
+  endScreen.style.display = 'none';
+  toggleOpening.style.display = 'none';
+  closing.pause();
+  toggleInfo.style.display = '';
+  mobile.style.display = '';
+  isGameOver = false;
+  obstacleSpeed = 3;
+  resetScore();
+
+  // Start the game
+  startGame();
+}
+
       
 
 function loadBackgroundImage() {

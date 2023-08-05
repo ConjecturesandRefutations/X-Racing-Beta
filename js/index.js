@@ -36,10 +36,6 @@ toggleOpening.style.display = '';
 endScreen.style.display = 'none';
 mobile.style.display = 'none';
 
-const loadingElement = document.getElementById('loading');
-loadingElement.style.display='none';
-
-
 //Game Area
 const myCanvas = document.getElementById('canvas');
 const ctx = myCanvas.getContext('2d');
@@ -76,7 +72,6 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
   })  
 }
 function startGame() {
-  loadingElement.style.display = 'none';
   cancelAnimationFrame(animationFrameId);
   drive.play();
   currentGame = new Game();
@@ -209,7 +204,6 @@ const restartButton = document.querySelector('#restart-button');
 restartButton.addEventListener('click', restartGame);
 
 function restartGame() {
-  loadingElement.style.display = 'block';
   myCanvas.style.display = 'block';
   endScreen.style.display = 'none';
   toggleOpening.style.display = 'none';
@@ -221,16 +215,6 @@ function restartGame() {
   resetScore();
   startGame();
 }
-
-function resetScore() {
-  currentGame.score = 0;
-  scoreDisplay.innerText = 0;
-  currentGame.level = 1;
-  level.innerText = currentGame.level;
-  lastDifficultyUpdate = 0;
-  modulo = 30;
-}
-
 
       function endGame(){
         closing.play();

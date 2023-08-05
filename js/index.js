@@ -200,31 +200,42 @@ function startGame() {
         modulo = 30;
       }
 
-const restartButton = document.querySelector('#restart-button');
-restartButton.addEventListener('click', restartGame);
+      const restartButton = document.querySelector('#restart-button');
+      restartButton.addEventListener('click', () => {
+        const loadingScreen = document.getElementById('loading-screen');
+        loadingScreen.style.display = 'block';
+      
+        // Load the background image and start the game after it's loaded
+        loadBackgroundImage().then(() => {
+          // The background image is loaded, so now we can call the restartGame() function
+          loadingScreen.style.display = 'none'; // Hide the loading screen
+          restartGame(); // Call restartGame() to handle the rest of the restart logic
+        });
+      });
+      
+      function restartGame() {
+        // The rest of the restart logic 
+        myCanvas.style.display = 'block';
+        endScreen.style.display = 'none';
+        toggleOpening.style.display = 'none';
+        closing.pause();
+        toggleInfo.style.display = '';
+        mobile.style.display = '';
+        isGameOver = false;
+        obstacleSpeed = 3;
+        resetScore();
+      
+        // Start the game
+        startGame();
+      }
+      
 
-function restartGame() {
-  const loadingScreen = document.getElementById('loading-screen');
-  loadingScreen.style.display = 'block';
-  myCanvas.style.display = 'block';
-  endScreen.style.display = 'none';
-  toggleOpening.style.display = 'none';
-  closing.pause();
-  toggleInfo.style.display = '';
-  mobile.style.display = '';
-  isGameOver = false;
-  obstacleSpeed = 3;
-  resetScore();
-
-  // Load the background image
-  background.onload = () => {
-    // The background image is loaded, so now we can start the game
-    loadingScreen.style.display = 'none'; // Hide the loading screen
-    startGame(); // Start the game
-  };
-
-  // Set the background source (This will trigger the 'onload' event)
-  background.src = "./images/road.png";
+function loadBackgroundImage() {
+return new Promise((resolve, reject) => {
+  background.onload = resolve;
+  background.onerror = reject;
+  background.src = "./images/road.png"; // Set the background source (This will trigger the 'onload' event)
+});
 }
 
       function endGame(){

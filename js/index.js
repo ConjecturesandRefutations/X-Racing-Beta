@@ -60,10 +60,6 @@ window.onload = () => {
     startGame();
     };
 
-    document.onkeydown = (e) => {
-      let whereToGo = e.keyCode;
-      currentCar.moveCar(whereToGo);
-  }
   };
 
   //Main Menu Button

@@ -81,7 +81,7 @@ class Car {
       // Variables to track button presses
     this.leftButtonDown = false;
     this.rightButtonDown = false;
-    this.throttleDelay = 100; // Set the throttle delay in milliseconds
+    this.throttleDelay = 100; // Mobile Throttle Delay (Milliseconds)
 
     // Select the mobile-controls buttons
     this.leftButton = document.getElementById('left');
@@ -93,7 +93,11 @@ class Car {
 
     this.isCarMoving = false;
 
-    this.throttleDelay = 100; // Set the throttle delay in milliseconds for keyboard controls
+    this.throttleDelay = 100; // Keyboard Throttle Delay (Milliseconds)
+
+    //Event listeners for keyboard controls
+    document.addEventListener('keydown', (event) => this.handleKeyDown(event));
+    document.addEventListener('keyup', (event) => this.handleKeyUp(event));
     
     }
     
@@ -116,32 +120,27 @@ class Car {
       ctx.drawImage(carImg, this.x, this.y, this.width, this.height);
     }
 
-
-    moveCar(keyCode){
-      switch(keyCode){
-        case 37: //left
-        if(this.x > 15){
-          this.x -= 10;
-          turn.play();
-        }
-          break;
-        case 39: //right
-        if (this.x < 470 ){
-          this.x += 10;
-          turn.play();
-        }
-          break;
-          case 38: //up
-          if(this.y>20){
-             this.y -= 10;
-             turn.play();
-          }
-          break;
-          case 40: //down
-         if(this.y<580){
-             this.y += 10;
-             turn.play();
-         }
+    handleKeyDown(event) {
+      if (event.keyCode === 37) {
+        // left arrow key
+        this.leftButtonDown = true;
+        this.throttledLeftStart();
+      } else if (event.keyCode === 39) {
+        // right arrow key
+        this.rightButtonDown = true;
+        this.throttledRightStart();
+      }
+    }
+  
+    handleKeyUp(event) {
+      if (event.keyCode === 37) {
+        // left arrow key
+        this.leftButtonDown = false;
+        this.stopMovingCar();
+      } else if (event.keyCode === 39) {
+        // right arrow key
+        this.rightButtonDown = false;
+        this.stopMovingCar();
       }
     }
 

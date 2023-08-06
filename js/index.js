@@ -157,13 +157,13 @@ function resetScore() {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
  
-     if (detectCollision(currentGame.obstacles[i])) {
+      if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }   
+        }    
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
@@ -175,46 +175,10 @@ function resetScore() {
         congrats.play();
         obstacleSpeed += 0.5;
         currentGame.level++;
+        modulo-=2;
         lastDifficultyUpdate = currentGame.score;
         level.innerText = currentGame.level;
         console.log(currentGame.level);
-      
-        // Set the modulo value based on the difficulty level
-        switch (currentGame.level) {
-          case 1:
-            modulo = 30;
-            break;
-          case 2:
-            modulo = 25;
-            break;
-          case 3:
-            modulo = 20;
-            break;
-          case 4:
-            modulo = 17;
-            break;
-          case 5:
-            modulo = 15;
-            break;
-          case 6:
-            modulo = 13;
-            break;
-          case 7:
-            modulo = 11;
-            break;
-          case 8:
-            modulo = 9;
-            break;
-          case 9:
-            modulo = 7;
-            break;
-          case 10:
-            modulo = 5;
-            break;
-          case 11:
-            modulo = 2;
-            break;
-        }
       }
 
       function endGame(){

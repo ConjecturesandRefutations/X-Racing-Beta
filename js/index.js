@@ -22,7 +22,7 @@ let frameCount = 0;
 let level = document.querySelector('#level')
 let lastDifficultyUpdate = 0;
 
-let modulo = 30;
+let divisor = 30;
 
 let isRestarting = false; // A flag to prevent multiple restarts
 
@@ -119,7 +119,7 @@ function resetScore() {
   currentGame.level = 1;
   level.innerText = currentGame.level;
   lastDifficultyUpdate = 0;
-  modulo = 30;
+  divisor = 30;
 }  
 
   function updateCanvas() {
@@ -140,7 +140,7 @@ function resetScore() {
     currentCar.drawCar(); // redraw the Car at its current position
     obstaclesFrequency++;
 
-    if (obstaclesFrequency % modulo === 1) {
+    if (obstaclesFrequency % divisor === 1) {
         //Draw an obstacle
         let randomObstacleX = Math.floor(Math.random() * myCanvas.width);
         let randomObstacleY = -50;
@@ -163,13 +163,13 @@ function resetScore() {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
  
-/*       if (detectCollision(currentGame.obstacles[i])) {
+       if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }     */
+        }     
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
@@ -181,10 +181,9 @@ function resetScore() {
         congrats.play();
         obstacleSpeed += 0.5;
         currentGame.level++;
-        modulo-=2;
+        divisor-=2;
         lastDifficultyUpdate = currentGame.score;
         level.innerText = currentGame.level;
-        console.log(obstacleSpeed);
       }
 
       function endGame(){

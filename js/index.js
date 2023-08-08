@@ -66,7 +66,14 @@ window.onload = () => {
 let mainMenuButton = document.getElementsByClassName('main-menu-button')
 for (let i = 0 ; i < mainMenuButton.length; i++) {
   mainMenuButton[i].addEventListener('click',  ()=>{
-    location.reload() 
+    resetScore();
+    toggleOpening.style.display = '';
+    myCanvas.style.display = 'none';
+    toggleInfo.style.display = 'none';      
+    mobile.style.display = 'none';
+    endScreen.style.display= 'none';
+    closing.pause();
+    isGameOver = false;
   })  
 }
 function startGame() {
@@ -84,7 +91,9 @@ function startGame() {
     addTouchListeners();
   }
 
-  const restartButton = document.querySelector('#restart-button');
+}
+
+const restartButton = document.querySelector('#restart-button');
 restartButton.addEventListener('click', restartGame);
 
 function restartGame() {
@@ -111,10 +120,7 @@ function resetScore() {
   level.innerText = currentGame.level;
   lastDifficultyUpdate = 0;
   modulo = 30;
-}
-}
-    
-  
+}  
 
   function updateCanvas() {
 

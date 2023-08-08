@@ -201,7 +201,6 @@ button:hover{
 }
 
 .mobile-controls{
-  color: white;
   display: none;
 }
 
@@ -256,6 +255,7 @@ button:hover{
     transform: translate(-50%);
     bottom: 0;
   }
+
   }
 
 

@@ -74,6 +74,7 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
     endScreen.style.display= 'none';
     closing.pause();
     isGameOver = false;
+    obstacleSpeed = 3;
   })  
 }
 function startGame() {

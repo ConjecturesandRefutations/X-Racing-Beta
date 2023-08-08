@@ -91,7 +91,6 @@ function startGame() {
   if (!isGameOver) {
     addTouchListeners();
   }
-
 }
 
 const restartButton = document.querySelector('#restart-button');
@@ -164,13 +163,13 @@ function resetScore() {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
  
-      if (detectCollision(currentGame.obstacles[i])) {
+/*       if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }    
+        }     */
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
@@ -185,7 +184,7 @@ function resetScore() {
         modulo-=2;
         lastDifficultyUpdate = currentGame.score;
         level.innerText = currentGame.level;
-        console.log(currentGame.level);
+        console.log(obstacleSpeed);
       }
 
       function endGame(){

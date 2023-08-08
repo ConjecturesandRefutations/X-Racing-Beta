@@ -237,7 +237,7 @@ button:hover{
 }
 }
 
-@media(max-width:960px){
+@media(max-width:1060px){
   #canvas  {
     width: 60%;
     height: 60%;

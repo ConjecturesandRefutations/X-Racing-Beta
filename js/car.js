@@ -160,7 +160,7 @@ startMovingCar(direction) {
     if (direction === 'left' && this.leftButtonDown && this.x > 5) {
       this.x -= 3;
       turn.play();
-    } else if (direction === 'right' && this.rightButtonDown && this.x < myCanvas.width - 40) {
+    } else if (direction === 'right' && this.rightButtonDown && this.x < myCanvas.width - 35) {
       this.x += 3;
       turn.play();
     }

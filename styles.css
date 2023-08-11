@@ -283,7 +283,7 @@ button:hover{
   }
   .timer{
     left: 0px;
-    bottom: 5px;
+    bottom: 30vh;
   }
   #level{
     font-size: 70px;

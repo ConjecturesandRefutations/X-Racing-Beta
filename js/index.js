@@ -175,16 +175,17 @@ function resetScore() {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
  
-          if (detectCollision(currentGame.obstacles[i])) {
+         if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }        
+        }      
         // Check collision with bonus boxes
   for (let i = 0; i < currentGame.bonuses.length; i++) {
     if (detectCollision(currentGame.bonuses[i])) {
+      congrats.pause();
       yummy.play();
       currentGame.bonuses.splice(i, 1); // Remove the bonus box
       currentGame.score += 50; // Increase the score by 50

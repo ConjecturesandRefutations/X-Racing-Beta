@@ -66,10 +66,10 @@ html, body, .opening-section {
 .timer{
   position: absolute;
   left: 50px;
-  bottom: 5px;
+  bottom: 50px;
   color:white;
   display: flex;
-  flex-direction: column  ;
+  flex-direction: column;
 }
 
 #countdown{
@@ -283,6 +283,7 @@ button:hover{
   }
   .timer{
     left: 0px;
+    bottom: 5px;
   }
   #level{
     font-size: 70px;

@@ -287,18 +287,29 @@ button:hover{
     left: 0px;
   }
   .score{
-    margin-left: -50px;
+    position: absolute;
+    left: 50%;
+    transform: translate(-50%);
     top: 0px;
+    display: flex;
+    flex-direction: column;
   }
   .level{
-    margin-right: -50px;
+    position: absolute;
+    right: 5px;
+    top: 50vh;
+    display: flex;
+    flex-direction: column;
+    font-size: 20px;
+    display: flex;
+    flex-direction: column;
+  }
+  #level{
+    font-size: 50px;
   }
   .timer{
     left: 0px;
     bottom: 30vh;
-  }
-  #level{
-    font-size: 70px;
   }
   .mobile-controls{
     display: block;
@@ -325,5 +336,8 @@ button:hover{
     .opening-text > p,
   .opening-text > h1 {
     margin: 0px;
+}
+.level{
+  font-size: 15px;
 }
   }

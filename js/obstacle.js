@@ -27,7 +27,7 @@ class Obstacle {
   
   class Bonus extends Obstacle {
     constructor(x, y) {
-        super(x, y, 60, 60); 
+        super(x, y, 70, 50); 
 
         this.obstacleType = 'bonus';
     }

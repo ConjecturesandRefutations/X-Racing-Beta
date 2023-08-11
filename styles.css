@@ -63,6 +63,20 @@ html, body, .opening-section {
   color: red;
 }
 
+.timer{
+  position: absolute;
+  left: 50px;
+  bottom: 50px;
+  color:white;
+  display: flex;
+  flex-direction: column;
+}
+
+#countdown{
+  font-size: 50px;
+  font-weight: bold;
+}
+
 .checkbox{
     width: 20px;
     height: 20px;
@@ -258,6 +272,18 @@ button:hover{
   }
   .stats{
     top: 0px;
+    left: 0px;
+  }
+  .score{
+    margin-left: -50px;
+    top: 0px;
+  }
+  .level{
+    margin-right: -50px;
+  }
+  .timer{
+    left: 0px;
+    bottom: 5px;
   }
   #level{
     font-size: 70px;

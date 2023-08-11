@@ -10,6 +10,8 @@ let opening = new Audio('./audio/opening.mp3')
 
 let closing = new Audio('./audio/closing.mp3')
 
+let yummy = new Audio('./audio/yummy.mp3')
+
 // Function to start playing the opening audio
 
 let openingAudioPlaying = false;

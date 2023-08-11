@@ -26,10 +26,13 @@ let divisor = 30;
 
 let isRestarting = false; // A flag to prevent multiple restarts
 
+let startTime = 0;
+let countdown = 20;
 
 //Opening Area and Start Button
 
 const toggleButton = document.querySelector('#start-button');
+const timer = document.querySelector('.timer')
 const toggleOpening = document.querySelector('.opening-section');
 const toggleInfo = document.querySelector('.info');
 const endScreen = document.querySelector('.full-time')
@@ -38,6 +41,7 @@ const mobile = document.querySelector('.mobile-controls')
 toggleOpening.style.display = '';
 endScreen.style.display = 'none';
 mobile.style.display = 'none';
+timer.style.display = 'none';
 
 
 //Game Area
@@ -57,6 +61,7 @@ window.onload = () => {
     myCanvas.style.display = '';
     toggleInfo.style.display = '';      
     mobile.style.display = '';
+    timer.style.display = '';
     startGame();
     };
 
@@ -78,6 +83,8 @@ for (let i = 0 ; i < mainMenuButton.length; i++) {
   })  
 }
 function startGame() {
+
+  startTime = Date.now();
   cancelAnimationFrame(animationFrameId);
   drive.play();
   currentGame = new Game();
@@ -105,6 +112,7 @@ function restartGame() {
   closing.pause();
   toggleInfo.style.display = '';
   mobile.style.display = '';
+  timer.style.display = '';
   isGameOver = false;
   obstacleSpeed = 3;
   resetScore();
@@ -123,6 +131,10 @@ function resetScore() {
 }  
 
   function updateCanvas() {
+
+    const currentTime = Date.now();
+    const elapsedTimeInSeconds = Math.floor((currentTime - startTime) / 1000); // Calculate elapsed time in seconds
+
 
     if (isGameOver) return;
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height); // clear canvas
@@ -169,7 +181,17 @@ function resetScore() {
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }       
+        }      
+        // Check collision with bonus boxes
+  for (let i = 0; i < currentGame.bonuses.length; i++) {
+    if (detectCollision(currentGame.bonuses[i])) {
+      congrats.pause();
+      yummy.play();
+      currentGame.bonuses.splice(i, 1); // Remove the bonus box
+      currentGame.score += 50; // Increase the score by 50
+      scoreDisplay.innerText = currentGame.score; // Update the score display
+    }
+  }
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
@@ -177,14 +199,38 @@ function resetScore() {
         } 
       }
 
-      if (currentGame.score >= lastDifficultyUpdate + 50) {
+      if (elapsedTimeInSeconds >= 20) { // Increase level every 20 seconds
         congrats.play();
         obstacleSpeed += 0.5;
         currentGame.level++;
-        if(divisor>2){
-        divisor-=2};
-        lastDifficultyUpdate = currentGame.score;
+        if (divisor > 2) {
+            divisor -= 2;
+        }
+        startTime = currentTime; // Reset the start time
         level.innerText = currentGame.level;
+    
+        // Create a new bonus and add it to the bonuses array
+        const randomX = Math.floor(Math.random() * myCanvas.width);
+        const newBonus = new Bonus(randomX, -60); // Start above the canvas
+        currentGame.bonuses.push(newBonus);
+    }
+    
+    // Update and display countdown
+    if (!isGameOver) {
+        countdown = 20 - elapsedTimeInSeconds;
+        countdown = countdown < 0 ? 0 : countdown; // To ensure sure countdown doesn't go negative
+        document.getElementById('countdown').innerText = countdown;
+    }
+
+      // Move and draw bonuses
+      for (let i = 0; i < currentGame.bonuses.length; i++) {
+        currentGame.bonuses[i].y += 5;
+        currentGame.bonuses[i].drawObstacle();
+
+        // Remove bonuses that are out of the canvas
+        if (currentGame.bonuses[i].y >= myCanvas.height) {
+          currentGame.bonuses.splice(i, 1);
+        }
       }
 
       function endGame(){
@@ -197,6 +243,7 @@ function resetScore() {
         myCanvas.style.display = 'none'
         endScreen.style.display = '';
         mobile.style.display = 'none';
+        timer.style.display = 'none';
         scoreTwo.innerText = currentGame.score;
         levelTwo.innerText = currentGame.level;
       }

@@ -25,3 +25,16 @@ class Obstacle {
     }
   }
   
+  class Bonus extends Obstacle {
+    constructor(x, y) {
+        super(x, y, 50, 50); 
+
+        this.obstacleType = 'bonus';
+    }
+
+    drawObstacle() {
+        const obstacleImg = new Image();
+        obstacleImg.src = './images/bonus-box.png'; 
+        ctx.drawImage(obstacleImg, this.x, this.y, this.width, this.height);
+    }
+}

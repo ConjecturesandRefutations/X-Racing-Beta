@@ -26,6 +26,8 @@ let divisor = 30;
 
 let isRestarting = false; // A flag to prevent multiple restarts
 
+let elapsedTime = 0;
+
 
 //Opening Area and Start Button
 
@@ -124,6 +126,20 @@ function resetScore() {
 
   function updateCanvas() {
 
+    elapsedTime++;
+
+    if (elapsedTime >= 1800) { // 1800 frames at 60 frames per second is equivalent to 30 seconds
+      // Create a bonus object
+      let randomBonusX = Math.floor(Math.random() * myCanvas.width);
+      let randomBonusY = -60; 
+      let newBonus = new Bonus(randomBonusX, randomBonusY); 
+
+      currentGame.obstacles.push(newBonus);
+      
+      // Reset the elapsed time
+      elapsedTime = 0;
+  }
+
     if (isGameOver) return;
     ctx.clearRect(0, 0, myCanvas.width, myCanvas.height); // clear canvas
     
@@ -163,13 +179,26 @@ function resetScore() {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
  
-         if (detectCollision(currentGame.obstacles[i])) {
-          congrats.pause();
-          crash.play();
-          currentCar.x = myCanvas.width/2;
-          currentCar.y = myCanvas.height/1.5;
-          endGame();
-        }       
+        if (detectCollision(currentGame.obstacles[i])) {
+          if (currentGame.obstacles[i] instanceof Bonus) {
+              // Handle bonus collision: Increase score by 50
+              currentGame.level--;
+              divisor+=2;
+              obstacleSpeed-=0.5;
+              currentGame.score += 50;
+              scoreDisplay.innerText = currentGame.score;
+
+              // Remove the bonus from the obstacles array
+              currentGame.obstacles.splice(i, 1);
+          } else {
+              // Handle obstacle collision: End the game
+              congrats.pause();
+              crash.play();
+              currentCar.x = myCanvas.width / 2;
+              currentCar.y = myCanvas.height / 1.5;
+              endGame();
+          }
+      }     
   
         // Logic for removing obstacles
         if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {

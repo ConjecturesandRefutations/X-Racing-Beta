@@ -334,6 +334,7 @@ button:hover{
   .level{
     right: 5px;
     bottom: 30vh;
+    top: auto;
     display: flex;
     flex-direction: column;
     font-size: 20px;

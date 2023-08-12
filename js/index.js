@@ -167,7 +167,6 @@ function resetScore() {
         currentGame.obstacles.push(newObstacle);
         currentGame.score++;
         scoreDisplay.innerText = currentGame.score
-
     }
 
   
@@ -197,8 +196,16 @@ function resetScore() {
       setTimeout(() => {
           bonusIndicator.classList.add('hidden');
       }, 1000); // Adjust the delay time as needed
-  
     }
+
+    for (let i = 0; i < currentGame.skulls.length; i++) {
+      if (detectCollision(currentGame.skulls[i])) {
+        congrats.pause();
+        currentGame.skulls.splice(i, 1); // Remove the skulls
+        currentGame.score -= 50; // Decrease the score by 50
+        scoreDisplay.innerText = currentGame.score; // Update the score display
+  }
+}
   }
   
         // Logic for removing obstacles
@@ -221,7 +228,7 @@ function resetScore() {
         const randomX = Math.floor(Math.random() * myCanvas.width);
         const newBonus = new Bonus(randomX, -60); // Start above the canvas
         currentGame.bonuses.push(newBonus);
-    }
+      }
     
     // Update and display countdown
     if (!isGameOver) {
@@ -269,3 +276,12 @@ function resetScore() {
     (currentCar.y < obstacle.y + obstacle.height) &&         // check top side
     (currentCar.y + currentCar.height > obstacle.y));           // check bottom side
   }
+
+  function detectOverlap(obj1, obj2) {
+    return (
+        obj1.x < obj2.x + obj2.width &&
+        obj1.x + obj1.width > obj2.x &&
+        obj1.y < obj2.y + obj2.height &&
+        obj1.y + obj1.height > obj2.y
+    );
+}

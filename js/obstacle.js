@@ -33,8 +33,22 @@ class Obstacle {
     }
 
     drawObstacle() {
-        const obstacleImg = new Image();
+        const obstacleImg = new Image(  );
         obstacleImg.src = './images/bonus-box.png'; 
         ctx.drawImage(obstacleImg, this.x, this.y, this.width, this.height);
     }
 }
+
+class Skull extends Obstacle {
+  constructor(x, y) {
+      super(x, y, 60, 60);
+      this.obstacleType = 'skull';
+  }
+
+  drawObstacle() {
+      const obstacleImg = new Image();
+      obstacleImg.src = './images/skull.png';
+      ctx.drawImage(obstacleImg, this.x, this.y, this.width, this.height);
+  }
+}
+

@@ -219,14 +219,12 @@ button:hover{
   font-size: x-small;
 }
 
-.mobile-controls{
-  display: none;
-}
-
 #left,
 #right{
   font-size: 100px;
   white-space: nowrap;
+  margin: 20px;
+  width: 75px;
 }
 #left:hover,
 #right:hover{
@@ -253,6 +251,11 @@ button:hover{
   color: greenyellow;
 }
 
+.skull{
+  white-space: nowrap;
+  color: darkred;
+}
+
 .bonus-indicator {
   position: absolute;
   font-size: 40px;
@@ -261,8 +264,35 @@ button:hover{
   z-index: 9999;
 }
 
+.skull-indicator {
+  position: absolute;
+  font-size: 40px;
+  color: red;
+  transition: opacity 0.5s ease-in-out;
+  z-index: 9999;
+}
+
 .hidden {
   opacity: 0;
+}
+
+.mobile-controls{
+  position: absolute;
+  left: 50%;
+  transform: translate(-50%);
+  bottom: 0;
+  gap: 50px;
+  white-space: nowrap;
+}
+
+.boxes{
+  display: flex;
+  flex-direction: row;
+  white-space: nowrap;
+}
+
+.boxes > p {
+  background-color: black;
 }
 
 @media(max-width:630px){
@@ -276,6 +306,12 @@ button:hover{
 .music-credit{
   display: none;
 }
+}
+
+@media(min-width:1060px){
+  .mobile-controls{
+    display: none;
+  }
 }
 
 @media(max-width:1060px){
@@ -311,14 +347,6 @@ button:hover{
     left: 0px;
     bottom: 30vh;
   }
-  .mobile-controls{
-    display: block;
-    position: absolute;
-    left: 50%;
-    transform: translate(-50%);
-    bottom: 0;
-  }
-
   }
 
 

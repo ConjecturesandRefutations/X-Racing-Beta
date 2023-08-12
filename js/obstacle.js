@@ -40,15 +40,17 @@ class Obstacle {
 }
 
 class Skull extends Obstacle {
-  constructor(x, y) {
+  constructor(x, y, width, height) {
       super(x, y, 60, 60);
       this.obstacleType = 'skull';
   }
 
   drawObstacle() {
       const obstacleImg = new Image();
+      
       obstacleImg.src = './images/skull.png';
       ctx.drawImage(obstacleImg, this.x, this.y, this.width, this.height);
   }
 }
+
 

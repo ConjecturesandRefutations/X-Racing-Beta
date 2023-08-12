@@ -6,6 +6,8 @@ let currentCar;
 let obstaclesFrequency = 0; // support the logic for generating obstacles
 let obstacleSpeed = 3;
 
+let skullFrequency = 0; // support the logic for generating skulls
+
 let isGameOver = false;
 let animationFrameId; 
 
@@ -151,6 +153,7 @@ function resetScore() {
 
     currentCar.drawCar(); // redraw the Car at its current position
     obstaclesFrequency++;
+    skullFrequency++;
 
     if (obstaclesFrequency % divisor === 1) {
         //Draw an obstacle
@@ -169,24 +172,57 @@ function resetScore() {
         scoreDisplay.innerText = currentGame.score
     }
 
+    if (skullFrequency >= 200) {
+      // Draw a skull
+      let randomSkullX = Math.floor(Math.random() * myCanvas.width);
+      let randomSkullY = -50;
+      let randomSkullWidth = 60;
+      let randomSkullHeight = 60;
+      let newSkull = new Skull(
+          randomSkullX,
+          randomSkullY,
+          randomSkullWidth,
+          randomSkullHeight,
+          console.log("Generating skull")
+      );
+  
+      currentGame.skulls.push(newSkull);
+      console.log(currentGame.skulls.length);
+
+        
+  
+      // Reset the skull frequency counter
+      skullFrequency = 0;
+  } else {
+      // Increment the skull frequency counter
+      skullFrequency++;
+  }
+  
+
   
     for(let i = 0; i<currentGame.obstacles.length; i++) {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
  
-       if (detectCollision(currentGame.obstacles[i])) {
+        if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }     
+        }      
+              // Logic for removing obstacles
+       if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
+        currentGame.obstacles.splice(i, 1); // remove that obstacle from the array
+      } 
+      }
+
         // Check collision with bonus boxes
   for (let i = 0; i < currentGame.bonuses.length; i++) {
     if (detectCollision(currentGame.bonuses[i])) {
+      currentGame.bonuses.splice(i, 1);
       congrats.pause();
       yummy.play();
-      currentGame.bonuses.splice(i, 1); // Remove the bonus box
       currentGame.score += 50; // Increase the score by 50
       scoreDisplay.innerText = currentGame.score; // Update the score display
 
@@ -197,22 +233,39 @@ function resetScore() {
           bonusIndicator.classList.add('hidden');
       }, 1000); // Adjust the delay time as needed
     }
+                  // Logic for removing obstacles
+                  if (currentGame.bonuses.length > 0 && currentGame.bonuses[i].y >= 700) {
+                    currentGame.bonuses.splice(i, 1); // remove that obstacle from the array
+                  } 
+  }
 
-    for (let i = 0; i < currentGame.skulls.length; i++) {
-      if (detectCollision(currentGame.skulls[i])) {
-        congrats.pause();
-        currentGame.skulls.splice(i, 1); // Remove the skulls
-        currentGame.score -= 50; // Decrease the score by 50
-        scoreDisplay.innerText = currentGame.score; // Update the score display
-  }
+  for (let i = 0; i < currentGame.skulls.length; i++) {
+    currentGame.skulls[i].y += 5; 
+    currentGame.skulls[i].drawObstacle();
+
+    if (detectCollision(currentGame.skulls[i])) {
+      currentGame.skulls.splice(i, 1); 
+      congrats.pause();
+      skull.play();
+      currentGame.score -= 50; // Decrease the score by 50
+      scoreDisplay.innerText = currentGame.score; // Update the score display
+
+      // Display the skull indicator and then hide it after a delay
+    const skullIndicator = document.getElementById('skull-indicator');
+    skullIndicator.classList.remove('hidden');
+    setTimeout(() => {
+        skullIndicator.classList.add('hidden');
+    }, 1000); // Adjust the delay time as needed
 }
-  }
-  
-        // Logic for removing obstacles
-        if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
-          currentGame.obstacles.splice(i, 1); // remove that obstacle from the array
-        } 
-      }
+
+                  // Logic for removing obstacles
+                  for (let i = currentGame.skulls.length - 1; i >= 0; i--) {
+                    if (currentGame.skulls[i].y >= 700) {
+                        currentGame.skulls.splice(i, 1); 
+                        }
+
+                      }
+  }        
 
       if (elapsedTimeInSeconds >= 20) { // Increase level every 20 seconds
         congrats.play();
@@ -277,11 +330,4 @@ function resetScore() {
     (currentCar.y + currentCar.height > obstacle.y));           // check bottom side
   }
 
-  function detectOverlap(obj1, obj2) {
-    return (
-        obj1.x < obj2.x + obj2.width &&
-        obj1.x + obj1.width > obj2.x &&
-        obj1.y < obj2.y + obj2.height &&
-        obj1.y + obj1.height > obj2.y
-    );
-}
+

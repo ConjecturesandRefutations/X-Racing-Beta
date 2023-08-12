@@ -1,16 +1,18 @@
-let crash = new Audio('./audio/crash.mp3')
+let crash = new Audio('./audio/crash.mp3');
 
-let drive = new Audio('./audio/drive.mp3')
+let drive = new Audio('./audio/drive.mp3');
 
-let turn = new Audio('./audio/turn.mp3')
+let turn = new Audio('./audio/turn.mp3');
 
-let congrats = new Audio('./audio/congrats.mp3')
+let congrats = new Audio('./audio/congrats.mp3');
 
-let opening = new Audio('./audio/opening.mp3')
+let opening = new Audio('./audio/opening.mp3');
 
-let closing = new Audio('./audio/closing.mp3')
+let closing = new Audio('./audio/closing.mp3');
 
-let yummy = new Audio('./audio/yummy.mp3')
+let yummy = new Audio('./audio/yummy.mp3');
+
+let skull = new Audio('./audio/skull.mp3');
 
 // Function to start playing the opening audio
 

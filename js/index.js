@@ -204,14 +204,14 @@ function resetScore() {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();
  
-        if (detectCollision(currentGame.obstacles[i])) {
+         if (detectCollision(currentGame.obstacles[i])) {
           congrats.pause();
           crash.play();
           currentCar.x = myCanvas.width/2;
           currentCar.y = myCanvas.height/1.5;
           endGame();
-        }      
-              // Logic for removing obstacles
+        }       
+              // Logic for removing obstacles 
        if (currentGame.obstacles.length > 0 && currentGame.obstacles[i].y >= 700) {
         currentGame.obstacles.splice(i, 1); // remove that obstacle from the array
       } 

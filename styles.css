@@ -221,7 +221,7 @@ button:hover{
 
 #left,
 #right{
-  font-size: 100px;
+  font-size: 60px;
   white-space: nowrap;
   margin: 20px;
   width: 75px;
@@ -352,9 +352,6 @@ button:hover{
 
 
   @media(max-width:600px){
-    #left,#right{
-      font-size: 50px;
-    }
     .opening-text > p,
   .opening-text > h1 {
     margin: 5px;

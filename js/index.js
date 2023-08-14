@@ -198,8 +198,6 @@ function resetScore() {
       skullFrequency++;
   }
   
-
-  
     for(let i = 0; i<currentGame.obstacles.length; i++) {
         currentGame.obstacles[i].y += obstacleSpeed; 
         currentGame.obstacles[i].drawObstacle();

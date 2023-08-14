@@ -36,7 +36,7 @@ function pauseOpeningAudio() {
   openingAudioPlaying = false;
 }
 
-const openingAudio = document.querySelector('#audio-button');
+const openingAudio = document.querySelector('.play-music');
 
 
 // Add a simple interaction event to play/pause the opening audio when the user clicks

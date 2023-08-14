@@ -198,7 +198,12 @@ button:hover{
   color: white;
   background-color: black;
   padding: none;
+  display: flex;
+  flex-direction: row;
 }
+
+.fa{margin-top: 20px;}
+
 #sound{
   color: red;
 }
@@ -242,6 +247,11 @@ button:hover{
 }
 
 #bonus{
+  width: 70px;
+  height: 50px;
+}
+
+#skull{
   width: 70px;
   height: 50px;
 }
@@ -293,6 +303,20 @@ button:hover{
 
 .boxes > p {
   background-color: black;
+}
+
+.login{
+  background-color: blue;
+  color: white;
+  font-size: small;
+  position: absolute;
+  top: 0;
+  right: 0;
+}
+
+.login:hover{
+  background-color: white;
+  color: blue;
 }
 
 @media(max-width:630px){
@@ -366,4 +390,33 @@ button:hover{
 .level{
   font-size: 15px;
 }
+#skull{
+  max-width: 30px;
+}
+#bonus{
+  max-width: 30px;
+}
   }
+
+  @media(max-width:450px){
+    .audio  {
+      display: none;
+    }
+    .fa{
+      font-size: 60px;
+    }
+    }
+
+    @media(max-width:350px){
+      .fa{
+        font-size: 50px;
+      }
+      }
+
+      @media(max-width:400px){
+
+        .fa{
+          font-size: 40px;
+        }
+        }
+    

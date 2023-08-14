@@ -390,12 +390,6 @@ button:hover{
 .level{
   font-size: 15px;
 }
-#skull{
-  max-width: 30px;
-}
-#bonus{
-  max-width: 30px;
-}
   }
 
   @media(max-width:450px){
@@ -410,6 +404,15 @@ button:hover{
     @media(max-width:350px){
       .fa{
         font-size: 50px;
+      }
+      }
+
+    @media(max-width:360px){
+      #skull{
+        max-width: 40px;
+      }
+      #bonus{
+        max-width: 40px;
       }
       }
 

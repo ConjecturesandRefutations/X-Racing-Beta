@@ -229,7 +229,7 @@ function resetScore() {
       bonusIndicator.classList.remove('hidden');
       setTimeout(() => {
           bonusIndicator.classList.add('hidden');
-      }, 1000); // Adjust the delay time as needed
+      }, 1000); 
     }
                   // Logic for removing obstacles
                   if (currentGame.bonuses.length > 0 && currentGame.bonuses[i].y >= 700) {
@@ -253,7 +253,7 @@ function resetScore() {
     skullIndicator.classList.remove('hidden');
     setTimeout(() => {
         skullIndicator.classList.add('hidden');
-    }, 1000); // Adjust the delay time as needed
+    }, 1000); 
 }
 
                   // Logic for removing obstacles

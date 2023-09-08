@@ -202,7 +202,7 @@ button:hover{
   flex-direction: row;
 }
 
-.fa{margin-top: 20px;}
+.fa,.fas{margin-top: 20px;}
 
 #sound{
   color: red;
@@ -396,13 +396,13 @@ button:hover{
     .audio  {
       display: none;
     }
-    .fa{
+    .fa,.fas{
       font-size: 60px;
     }
     }
 
     @media(max-width:350px){
-      .fa{
+      .fa,.fas{
         font-size: 50px;
       }
       }
@@ -418,7 +418,7 @@ button:hover{
 
       @media(max-width:400px){
 
-        .fa{
+        .fa,.fas{
           font-size: 40px;
         }
         }

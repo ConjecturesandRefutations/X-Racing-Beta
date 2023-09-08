@@ -14,36 +14,44 @@ let yummy = new Audio('./audio/yummy.mp3');
 
 let skull = new Audio('./audio/skull.mp3');
 
-// Function to start playing the opening audio
+document.addEventListener("DOMContentLoaded", function () {
+  let opening = new Audio('./audio/opening.mp3');
+  let openingAudioPlaying = false;
 
-let openingAudioPlaying = false;
-
-// Function to start playing the opening audio
-function playOpeningAudio() {
-  opening.play()
-    .then(() => {
-      openingAudioPlaying = true;
-    })
-    .catch((error) => {
-      console.error('Error playing opening audio:', error);
-      openingAudioPlaying = false;
-    });
-}
-
-// Function to pause the opening audio
-function pauseOpeningAudio() {
-  opening.pause();
-  openingAudioPlaying = false;
-}
-
-const openingAudio = document.querySelector('.play-music');
-
-
-// Add a simple interaction event to play/pause the opening audio when the user clicks
-openingAudio.onclick = () => {
-  if (openingAudioPlaying) {
-    pauseOpeningAudio();
-  } else {
-    playOpeningAudio();
+  // Function to start playing the opening audio
+  function playOpeningAudio() {
+    opening.play()
+      .then(() => {
+        openingAudioPlaying = true;
+        // Update the class of the volume icon
+        const volumeIcon = document.getElementById('volume-icon');
+        volumeIcon.classList.remove('fa', 'fa-volume-mute');
+        volumeIcon.classList.add('fa', 'fa-volume-up');
+      })
+      .catch((error) => {
+        console.error('Error playing opening audio:', error);
+        openingAudioPlaying = false;
+      });
   }
-};
+
+  // Function to pause the opening audio
+  function pauseOpeningAudio() {
+    opening.pause();
+    openingAudioPlaying = false;
+    // Update the class of the volume icon
+    const volumeIcon = document.getElementById('volume-icon');
+    volumeIcon.classList.remove('fa', 'fa-volume-up');
+    volumeIcon.classList.add('fa', 'fa-volume-mute');
+  }
+
+  const openingAudio = document.querySelector('.play-music');
+
+  // Add a click event listener to the opening audio element
+  openingAudio.addEventListener('click', () => {
+    if (openingAudioPlaying) {
+      pauseOpeningAudio();
+    } else {
+      playOpeningAudio();
+    }
+  });
+});

@@ -23,10 +23,6 @@ document.addEventListener("DOMContentLoaded", function () {
     opening.play()
       .then(() => {
         openingAudioPlaying = true;
-        // Update the class of the volume icon
-        const volumeIcon = document.getElementById('volume-icon');
-        volumeIcon.classList.remove('fa', 'fa-volume-mute');
-        volumeIcon.classList.add('fa', 'fa-volume-up');
       })
       .catch((error) => {
         console.error('Error playing opening audio:', error);
@@ -38,20 +34,28 @@ document.addEventListener("DOMContentLoaded", function () {
   function pauseOpeningAudio() {
     opening.pause();
     openingAudioPlaying = false;
-    // Update the class of the volume icon
-    const volumeIcon = document.getElementById('volume-icon');
-    volumeIcon.classList.remove('fa', 'fa-volume-up');
-    volumeIcon.classList.add('fa', 'fa-volume-mute');
   }
 
   const openingAudio = document.querySelector('.play-music');
+  const volumeIcon = document.getElementById('volume-icon');
 
   // Add a click event listener to the opening audio element
   openingAudio.addEventListener('click', () => {
     if (openingAudioPlaying) {
       pauseOpeningAudio();
+      volumeIcon.classList.remove('fa', 'fa-volume-up');
+      volumeIcon.classList.add('fa', 'fa-volume-mute');
     } else {
       playOpeningAudio();
+      volumeIcon.classList.remove('fa', 'fa-volume-mute');
+      volumeIcon.classList.add('fa', 'fa-volume-up');
     }
+  });
+
+  // Event listener for the "ended" event of the opening audio
+  opening.addEventListener('ended', () => {
+    openingAudioPlaying = false;
+    volumeIcon.classList.remove('fa', 'fa-volume-up');
+    volumeIcon.classList.add('fa', 'fa-volume-mute');
   });
 });

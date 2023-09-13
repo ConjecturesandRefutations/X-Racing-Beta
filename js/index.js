@@ -58,6 +58,7 @@ window.onload = () => {
     toggleButton.onclick = (event) => {
     event.stopPropagation();
     pauseOpeningAudio();
+    opening.currentTime = 0;
     drive.play();
     toggleOpening.style.display = 'none';
     myCanvas.style.display = '';
@@ -300,6 +301,7 @@ function resetScore() {
       }
 
       function endGame(){
+        closing.currentTime = 0;
         closing.play();
         isGameOver = true;
         currentCar.x = myCanvas.width/2

@@ -336,14 +336,11 @@ button:hover{
   .mobile-controls{
     display: none;
   }
-}
-
-@media(max-width:1285px){
   #canvas  {
     width: 60%;
     height: 60%;
   }
-  }
+}
 
   @media(max-width:1060px){
   .stats{

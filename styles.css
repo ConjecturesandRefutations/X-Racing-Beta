@@ -332,17 +332,20 @@ button:hover{
 }
 }
 
-@media(min-width:1060px){
+@media(min-width:1285px){
   .mobile-controls{
     display: none;
   }
 }
 
-@media(max-width:1060px){
+@media(max-width:1285px){
   #canvas  {
     width: 60%;
     height: 60%;
   }
+  }
+
+  @media(max-width:1060px){
   .stats{
     top: 0px;
     left: 0px;
@@ -372,7 +375,7 @@ button:hover{
     left: 0px;
     bottom: 30vh;
   }
-  }
+}
 
 
   @media(max-width:600px){

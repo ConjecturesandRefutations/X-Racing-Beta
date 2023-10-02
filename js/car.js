@@ -23,7 +23,8 @@ function handleColorChange(event) {
 
 function addTouchListeners() {
   // Touch event handling for leftButton
-  currentCar.leftButton.ontouchstart = () => {
+  currentCar.leftButton.ontouchstart = (event) => {
+    event.preventDefault();
     currentCar.leftButtonDown = true;
     currentCar.throttledLeftStart();
   };
@@ -34,7 +35,8 @@ function addTouchListeners() {
   };
 
   // Touch event handling for rightButton
-  currentCar.rightButton.ontouchstart = () => {
+  currentCar.rightButton.ontouchstart = (event) => {
+    event.preventDefault();
     currentCar.rightButtonDown = true;
     currentCar.throttledRightStart();
   };

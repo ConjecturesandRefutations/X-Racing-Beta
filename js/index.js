@@ -329,5 +329,3 @@ function resetScore() {
     (currentCar.y < obstacle.y + obstacle.height) &&         // check top side
     (currentCar.y + currentCar.height > obstacle.y));           // check bottom side
   }
-
-
